@@ -11,22 +11,26 @@ public class User {
 
 	
 	@Setter(value = AccessLevel.NONE)
-	@Column(name = "user_id")
+	@Column(name = "id_user")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
 	
 	
-	@Column(name = "user_password")
+	@Column(name = "password")
 	@NotNull
 	@Size(min = 3, max = 15)
 	private String password;
 	
-	@Column(name = "user_email")
+	@Column(name = "email")
 	@NotNull
 	@Size(min = 3, max = 15)
 	@Email
 	private String email;
+	
+	@OneToOne(mappedBy = "user")
+	@ToString.Exclude
+	private Person person;
 	
 	
 

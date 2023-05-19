@@ -25,6 +25,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lv.venta.models.users.Student;
 
 @Table(name = "Table_Course")
 @Entity
@@ -50,6 +51,8 @@ public class Course {
 	private long courseId;
 
 
+	@ManyToMany(mappedBy = "debtCourses")
+	private Collection<Student> studentsWithDebt = new ArrayList<>();
 
 	public Course(
 			@Size(min = 5, max = 25) String title, 

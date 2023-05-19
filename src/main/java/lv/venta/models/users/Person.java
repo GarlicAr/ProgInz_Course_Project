@@ -1,6 +1,7 @@
 package lv.venta.models.users;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,10 +16,15 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name = "person_table")
-@Data
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
 	

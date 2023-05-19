@@ -36,7 +36,7 @@ public class User {
 
 	public User(@NotNull @Size(min = 3, max = 15) String password,
 			@NotNull @Size(min = 3, max = 15) @Email String email) {
-		super();
+		
 		this.password = password;
 		this.email = email;
 	}

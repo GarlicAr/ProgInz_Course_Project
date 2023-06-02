@@ -63,5 +63,13 @@ public class Course {
 
 
 	}
+	
+	public void addStudent(Student student) {
+		if(!studentsWithDebt.contains(student)) {
+			studentsWithDebt.add(student);
+		}
+	}
+	
+	//TODO Remove
 
 }

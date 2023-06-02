@@ -61,6 +61,15 @@ public class Student extends Person{
 		this.matriculaNo = matriculaNo;
 		Debt = debt;
 	}
+	
+	
+	public void addDebtCourse(Course course) {
+		if(!debtCourses.contains(course)) {
+			debtCourses.add(course);
+		}
+	}
+	
+	//TODO izveidot REMOVE debt 
 
 	
 	

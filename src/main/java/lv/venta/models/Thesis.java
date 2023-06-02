@@ -100,6 +100,19 @@ public class Thesis {
 			reviewers.add(reviewer);
 		}
 	}
+
+	public Thesis(String titleLv, String titleEn, String aim, String tasks, Student student,
+			Academic_personel personel) {
+		super();
+		this.titleLv = titleLv;
+		this.titleEn = titleEn;
+		this.aim = aim;
+		this.tasks = tasks;
+		this.student = student;
+		this.personel = personel;
+		this.submitDate = LocalDateTime.now();
+		this.status = Status.Submitted;
+	}
 	
 	
 

@@ -40,5 +40,11 @@ public class Academic_personel extends Person{
 	}
 	
 	
+	public void addThesisForReview(Thesis thesis) {
+		if(!ThesisForReview.contains(thesis)) {
+			ThesisForReview.add(thesis);
+		}
+	}
+	
 
 }

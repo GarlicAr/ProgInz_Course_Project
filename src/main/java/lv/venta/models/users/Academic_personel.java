@@ -1,5 +1,6 @@
 package lv.venta.models.users;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.*;
@@ -23,5 +24,8 @@ public class Academic_personel extends Person{
 	
 	@OneToMany(mappedBy = "personel")
 	private Collection<Thesis> thesis;
+	
+	@ManyToMany(mappedBy = "reviewers")
+	private Collection<Thesis> ThesisForReview = new ArrayList<>();
 
 }

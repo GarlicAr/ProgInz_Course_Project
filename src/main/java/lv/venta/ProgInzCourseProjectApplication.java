@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import lv.venta.enums.Degree;
+import lv.venta.models.Comments;
 import lv.venta.models.Course;
 import lv.venta.models.Thesis;
 import lv.venta.models.users.Academic_personel;
 import lv.venta.models.users.Person;
 import lv.venta.models.users.Student;
 import lv.venta.models.users.User;
+import lv.venta.repos.IRepoComments;
 import lv.venta.repos.IRepoCourse;
 import lv.venta.repos.IRepoThesis;
 import lv.venta.repos.users.IRepoAcademicPersonel;
@@ -33,7 +35,8 @@ public class ProgInzCourseProjectApplication {
 			IRepoAcademicPersonel academicPersonelRep, 
 			IRepoPerson personRep,
 			IRepoStudent studentRep,
-			IRepoUser userRep) {
+			IRepoUser userRep,
+			IRepoComments commentsRep) {
 		
 		
 		return new CommandLineRunner() {
@@ -54,7 +57,7 @@ public class ProgInzCourseProjectApplication {
 				
 				
 				//Courses
-				Course c1 = new Course("Java", 4);
+				Course c1 = new Course("Java_", 4);
 				Course c2 = new Course("DataStr", 2);
 				courseRep.save(c1);
 				courseRep.save(c2);
@@ -65,15 +68,16 @@ public class ProgInzCourseProjectApplication {
 				Academic_personel ac2 = new Academic_personel("Karlis", "Immers", "123455-00001", user2, Degree.master);
 				academicPersonelRep.save(ac1);
 				academicPersonelRep.save(ac2);
-				Student student1 = new Student("Arvids", "Ivbuls", "203421-92342", user3, "123ADT123", false );
-				Student student2 = new Student("Zigis", "Celotajs", "422452-12343", user4, "001RDB100", true );
+				Student student1 = new Student("Arvids", "Ivbuls", "203421-92342", user3, "123312321", false );
+				Student student2 = new Student("Zigis", "Celotajs", "422452-12343", user4, "00142422", true );
+				student2.addDebtCourse(c1);
 				studentRep.save(student1);
 				studentRep.save(student2);
-				student2.addDebtCourse(c1);
+				
 				c1.addStudent(student2);
 				//=======SAVE===========
 				courseRep.save(c1);
-				courseRep.save(c2);
+				//courseRep.save(c2);
 				//======================
 				
 				
@@ -88,6 +92,14 @@ public class ProgInzCourseProjectApplication {
 				ac2.addThesisForReview(th1);
 				academicPersonelRep.save(ac1);
 				academicPersonelRep.save(ac2);
+				
+				
+				//Comments
+				Comments comm1 = new Comments("Lielisks darbs!", ac1, th1);
+				commentsRep.save(comm1);
+				
+				
+				
 				
 				
 			}

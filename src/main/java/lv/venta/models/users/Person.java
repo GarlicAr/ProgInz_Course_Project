@@ -48,9 +48,7 @@ public class Person {
 	
 	
 	@Column(name = "personalCode")
-	@Size(min = 12, max = 12)
 	@NotNull
-	@Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstoss personas kods")
 	private String personalCode;
 	
 	@OneToOne

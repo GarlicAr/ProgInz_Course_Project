@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -87,6 +88,9 @@ public class Thesis {
 	@JoinColumn(name = "id_personel")
 	private Academic_personel personel;
 	
+	@OneToMany(mappedBy = "thesis")
+	private Collection<Comments> comments;
+	
 	//TODO izveidot saiti ar konsultantu/vertetaju utt. ja vajadzigs...xD
 	
 	@ManyToMany
@@ -98,6 +102,12 @@ public class Thesis {
 	public void addReviewer(Academic_personel reviewer) {
 		if(!reviewers.contains(reviewer)) {
 			reviewers.add(reviewer);
+		}
+	}
+	
+	public void addComment(Comments comment) {
+		if(!comments.contains(comment)) {
+			comments.add(comment);
 		}
 	}
 

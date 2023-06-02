@@ -29,7 +29,7 @@ import lombok.Setter;
 public class Person {
 	
 	@Setter(value = AccessLevel.NONE)
-	@Column(name = "id")
+	@Column(name = "id_person")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long personId;

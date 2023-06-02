@@ -3,6 +3,7 @@ package lv.venta.models.users;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -23,6 +24,7 @@ import lv.venta.models.Course;
 @Getter
 @Setter
 @NoArgsConstructor
+@AttributeOverride(name = "id_person", column = @Column( name = "studentId"))
 public class Student extends Person{
 	
 	

@@ -14,9 +14,6 @@ import lv.venta.enums.Degree;
 @AttributeOverride(name = "id_person", column = @Column(name = "id_personel"))
 public class Academic_personel extends Person{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id_personel;
 	
 	@Column(name="degree")
 	private Degree degree;

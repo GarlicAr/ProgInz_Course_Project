@@ -1,10 +1,13 @@
 package lv.venta.models.users;
 
+import java.util.Collection;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.venta.enums.Degree;
+import lv.venta.models.Thesis;
 
 @Setter
 @Getter
@@ -17,5 +20,8 @@ public class Academic_personel extends Person{
 	
 	@Column(name="degree")
 	private Degree degree;
+	
+	@OneToMany(mappedBy = "personel")
+	private Collection<Thesis> thesis;
 
 }

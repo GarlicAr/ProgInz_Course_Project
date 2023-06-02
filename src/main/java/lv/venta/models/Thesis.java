@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.venta.enums.Degree;
 import lv.venta.enums.Status;
+import lv.venta.models.users.Academic_personel;
 import lv.venta.models.users.Student;
 
 /*
@@ -78,6 +79,11 @@ public class Thesis {
 	@JoinColumn(name = "studentId")
 	private Student student;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_personel")
+	private Academic_personel personel;
+	
+	//TODO izveidot saiti ar konsultantu/vertetaju utt. ja vajadzigs...xD
 	
 	
 	

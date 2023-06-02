@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.venta.enums.Degree;
 import lv.venta.enums.Status;
+import lv.venta.models.users.Student;
 
 /*
  * 
@@ -70,6 +73,10 @@ public class Thesis {
 	
 	@Column(name = "Accepted_Time")
 	private LocalDateTime acceptedDate;
+	
+	@ManyToOne
+	@JoinColumn(name = "studentId")
+	private Student student;
 	
 	
 	

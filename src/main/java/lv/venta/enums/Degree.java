@@ -1,6 +1,6 @@
 package lv.venta.enums;
 
-public enum Grade {
+public enum Degree {
 	
 	Bachelor, master, doctor
 

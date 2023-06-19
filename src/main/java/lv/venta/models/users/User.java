@@ -1,6 +1,7 @@
 package lv.venta.models.users;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -20,13 +21,10 @@ public class User {
 	
 	@Column(name = "password")
 	@NotNull
-	@Size(min = 3, max = 15)
 	private String password;
 	
 	@Column(name = "email")
 	@NotNull
-	@Size(min = 3, max = 15)
-	@Email
 	private String email;
 	
 	@OneToOne(mappedBy = "user")
@@ -35,12 +33,18 @@ public class User {
 	
 	
 
-	public User(@NotNull @Size(min = 3, max = 15) String password,
-			@NotNull @Size(min = 3, max = 15) @Email String email) {
+	public User(@NotNull String password,
+			@NotNull @Size(min = 3, max = 15) String email) {
 		
-		this.password = password;
+		setPassword(password);
 		this.email = email;
+		
 	}
+	
+	public void setPassword(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
+    }
 	
 	
 	

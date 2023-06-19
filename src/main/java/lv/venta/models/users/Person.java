@@ -38,7 +38,7 @@ public class Person {
 	@NotNull
 	@Size(min = 3, max = 15)
 	@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+")
-	private String name;
+	private String personName;
 	
 	@Column(name = "surname")
 	@NotNull
@@ -59,7 +59,7 @@ public class Person {
 			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String surname,
 			@Size(min = 12, max = 12) @NotNull @Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstoss personas kods") String personalCode,
 			User user) {
-		this.name = name;
+		this.personName = name;
 		this.surname = surname;
 		this.personalCode = personalCode;
 		this.user = user;

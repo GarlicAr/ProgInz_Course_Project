@@ -22,6 +22,7 @@ public class UserCRUDService implements IUserCRUDService{
 	    return userRepo.findByEmail(email);
 	    
 	}
+	
 
 
 	@Override

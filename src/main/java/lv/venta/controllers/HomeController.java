@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import lv.venta.models.users.Person;
@@ -37,29 +38,29 @@ public class HomeController {
 	
 	@GetMapping("/login")
 	private String login(Model model) {
-		
-		User temp = new User();
-		
-		model.addAttribute("user", temp);
-		
 		return "login";
 	}
 	
 	@PostMapping("/login")
-	private String loginPost(@Valid @ModelAttribute("user") User user, Model model, BindingResult bindingResult) {
-	    if (bindingResult.hasErrors()) {
-	        model.addAttribute("error_message", bindingResult.getFieldError().getDefaultMessage());
-	        return "error-page";
-	    }
-	    
+	private String loginPost(@RequestParam("email") String email,@RequestParam("password") String password, Model model) {
+	   
 	    try {
-	        String email = user.getEmail();
-	        
+	    	
 	        User temp = userService.findByEmail(email);
+	        
+	        System.out.println(temp);
 	        
 	        if (temp != null) {
 	            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	            if (passwordEncoder.matches(user.getPassword(), temp.getPassword())) {
+	            
+	            System.out.println(password + " ======== "  +  temp.getPassword());
+	            
+	            if (passwordEncoder.matches(password, temp.getPassword())) {
+	            	
+	            	//====================================================
+	            	//Authenticatiom + sesion
+	            	
+	            	
 	                model.addAttribute("person", temp.getPerson());
 	                return "index";
 	            } else {
@@ -73,6 +74,8 @@ public class HomeController {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	    
+	    model.addAttribute("user", new User());
 	    
 	    return "error-page";
 	}
@@ -103,10 +106,15 @@ public class HomeController {
 
 	    try {
 	        if (userService.findByEmail(person.getUser().getEmail()) == null) {
-	            User temp = new User(person.getUser().getPassword(), person.getUser().getEmail());
-	            userService.registerUser(temp);
-
-	            person.setUser(temp);
+	        	
+	        	User user = new User();
+	            user.setPassword(person.getUser().getPassword());
+	            user.setEmail(person.getUser().getEmail());
+	        	
+	            userService.registerUser(user);
+	            
+	            
+	            person.setUser(user);
 	            personService.reigsterPerson(person); 
 
 	            model.addAttribute("person", person);

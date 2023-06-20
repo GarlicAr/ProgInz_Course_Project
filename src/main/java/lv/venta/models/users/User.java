@@ -2,6 +2,8 @@ package lv.venta.models.users;
 
 import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -10,6 +12,8 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 public class User {
+	
+	
 
 	
 	@Setter(value = AccessLevel.NONE)
@@ -41,10 +45,15 @@ public class User {
 		
 	}
 	
+
+	
 	public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
-    }
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		this.password = passwordEncoder.encode(password);
+		
+	}
 	
 	
 	

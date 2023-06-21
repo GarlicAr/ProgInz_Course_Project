@@ -47,7 +47,7 @@ public class Thesis {
 	@Column(name = "thesis_id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long thesis_id;
+	public long thesis_id;
 	
 	
 	//TODO pieviento validacijas	
@@ -90,8 +90,6 @@ public class Thesis {
 	
 	@OneToMany(mappedBy = "thesis")
 	private Collection<Comments> comments;
-	
-	//TODO izveidot saiti ar konsultantu/vertetaju utt. ja vajadzigs...xD
 	
 	@ManyToMany
 	@JoinTable(name = "thesis_reviewers",

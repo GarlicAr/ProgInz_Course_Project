@@ -12,7 +12,7 @@ public interface IStudentCRUDService {
 	
 	void deleteStudentByMatriculaNo(String matriculaNo) throws Exception;
 	
-	Student insertNewStudent(Student student);
+	void insertNewStudent(Student student);
 	
 	Student updateStudentByMatriculaNo(String matriculaNo) throws Exception;
 }

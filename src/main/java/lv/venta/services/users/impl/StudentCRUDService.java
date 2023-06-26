@@ -2,24 +2,27 @@ package lv.venta.services.users.impl;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.models.users.Student;
+import lv.venta.repos.users.IRepoStudent;
 import lv.venta.services.users.IStudentCRUDService;
 
 @Service
 public class StudentCRUDService implements IStudentCRUDService{
 
-	ArrayList<Student> allStudents = new ArrayList<Student>();
-	
+
+	@Autowired
+	IRepoStudent studentRepo;
 	@Override
 	public ArrayList<Student> selectAllStudents() {
-		return allStudents;
+		return (ArrayList<Student>) studentRepo.findAll();
 	}
 	
 	@Override
 	public Student selectStudentByMatriculaNo(String matriculaNo) throws Exception {
-		for (Student temp : allStudents) {
+		for (Student temp : selectAllStudents()) {
 			if (temp.getMatriculaNo().equals(matriculaNo)) {
 				return temp;
 			}
@@ -30,9 +33,9 @@ public class StudentCRUDService implements IStudentCRUDService{
 	@Override
 	public void deleteStudentByMatriculaNo(String matriculaNo) throws Exception {
 		boolean isFound = false;
-		for (Student temp : allStudents) {
+		for (Student temp : selectAllStudents()) {
 			if(temp.getMatriculaNo().equals(matriculaNo)) {
-				allStudents.remove(temp);
+				selectAllStudents().remove(temp);
 				isFound = true;
 				break;
 			}
@@ -42,15 +45,15 @@ public class StudentCRUDService implements IStudentCRUDService{
 		}
 	}
 	@Override
-	public Student insertNewStudent(Student student) {
-	    for(Student temp : allStudents) {
+	public void insertNewStudent(Student student) {
+	    for(Student temp : selectAllStudents()) {
 	        if(temp.getPersonName().equals(student.getPersonName()) && 
 	           temp.getSurname().equals(student.getSurname()) &&
 	           temp.getPersonalCode().equals(student.getPersonalCode()) && 
-	           temp.getUser().equals(student.getUser()) &&
+	           temp.getUser().getUser_id()==student.getUser().getUser_id() &&
 	           temp.getMatriculaNo().equals(student.getMatriculaNo()) &&
 	           temp.isDebt() == student.isDebt()) {
-	            return temp;
+	            studentRepo.save(temp);
 	        }
 	    }
 
@@ -58,11 +61,10 @@ public class StudentCRUDService implements IStudentCRUDService{
 	                                     student.getPersonalCode(), student.getUser(), 
 	                                     student.getMatriculaNo(), student.isDebt());
 
-	    allStudents.add(newStudent);
-	    return newStudent;
+	    studentRepo.save(newStudent);
 	}
 	public Student updateStudentByMatriculaNo(String matriculaNo) throws Exception {
-		for(Student temp : allStudents) {
+		for(Student temp : selectAllStudents()) {
 			if(temp.getMatriculaNo().equals(matriculaNo)) {
 				return temp;
 			}

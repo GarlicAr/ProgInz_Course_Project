@@ -77,7 +77,7 @@ public class StudentController {
     @PostMapping("/update/{matriculaNo}")
     public String updateStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, @Valid Student student, BindingResult result) {
         if (result.hasErrors()) {
-            return "update-page";
+            return "student-update-page";
         } else {
             try {
                 studentService.updateStudentByMatriculaNo(matriculaNo, student);

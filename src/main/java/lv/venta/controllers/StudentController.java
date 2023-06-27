@@ -64,9 +64,10 @@ public class StudentController {
     }
 
     @GetMapping("/update/{matriculaNo}")
-    public String updateStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, Model model) {
+    public String showUpdateForm(@PathVariable("matriculaNo") String matriculaNo, Model model) {
         try {
-            model.addAttribute("student", studentService.updateStudentByMatriculaNo(matriculaNo));
+            Student student = studentService.selectStudentByMatriculaNo(matriculaNo);
+            model.addAttribute("student", student);
             return "student-update-page";
         } catch (Exception e) {
             return "error-page";
@@ -75,15 +76,15 @@ public class StudentController {
 
     @PostMapping("/update/{matriculaNo}")
     public String updateStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, @Valid Student student, BindingResult result) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
+            return "update-page";
+        } else {
             try {
-                Student temp = studentService.updateStudentByMatriculaNo(matriculaNo);
-                return "redirect:/student/show/" + temp.getMatriculaNo();
+                studentService.updateStudentByMatriculaNo(matriculaNo, student);
+                return "redirect:/student/show/" + student.getMatriculaNo();
             } catch (Exception e) {
                 return "redirect:/error-page";
             }
-        } else {
-            return "update-page";
         }
     }
 }

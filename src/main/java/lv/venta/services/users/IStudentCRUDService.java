@@ -14,5 +14,5 @@ public interface IStudentCRUDService {
 	
 	void insertNewStudent(Student student);
 	
-	Student updateStudentByMatriculaNo(String matriculaNo) throws Exception;
+	void updateStudentByMatriculaNo(String matriculaNo, Student student) throws Exception;
 }

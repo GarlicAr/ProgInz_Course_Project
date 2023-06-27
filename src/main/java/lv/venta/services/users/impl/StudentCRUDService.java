@@ -1,6 +1,8 @@
 package lv.venta.services.users.impl;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,13 +65,27 @@ public class StudentCRUDService implements IStudentCRUDService{
 
 	    studentRepo.save(newStudent);
 	}
-	public Student updateStudentByMatriculaNo(String matriculaNo) throws Exception {
-		for(Student temp : selectAllStudents()) {
-			if(temp.getMatriculaNo().equals(matriculaNo)) {
-				return temp;
-			}
-		} throw new Exception("Nepareizs matrikulasNo");
+
+	@Override
+	public void updateStudentByMatriculaNo(String matriculaNo, Student inputStudent) throws Exception {
+	    List<Student> allStudents = (List<Student>) studentRepo.findAll();
+	    Optional<Student> optionalStudent = allStudents.stream()
+	            .filter(student -> student.getMatriculaNo().equals(matriculaNo))
+	            .findFirst();
+	    if (optionalStudent.isPresent()) {
+	        Student studentToUpdate = optionalStudent.get();
+	        studentToUpdate.setPersonName(inputStudent.getPersonName());
+	        studentToUpdate.setSurname(inputStudent.getSurname());
+	        studentToUpdate.setPersonalCode(inputStudent.getPersonalCode());
+	        studentToUpdate.setUser(inputStudent.getUser());
+	        studentToUpdate.setMatriculaNo(inputStudent.getMatriculaNo());
+	        studentToUpdate.setDebt(inputStudent.isDebt());
+	        studentRepo.save(studentToUpdate);
+	    } else {
+	        throw new Exception("Nepareizs matrikulasNo");
+	    }
 	}
+
 		
 	
 		

@@ -74,6 +74,7 @@
    <!-- Main content -->
     <div class="content">
         
+
 <div class="container" th:if="${ not#lists.isEmpty(thesis)}">
     <table>
         <tr>
@@ -100,9 +101,13 @@
             <td th:text="${thesis.statusFromSupervisor}"></td>
             <td th:text="${thesis.status}"></td>
             <td th:text="${thesis.acceptedDate}"></td>
-            <td th:text="${thesis.student}"></td>
-            <td th:text="${thesis.personel}"></td>
-            <td th:text="${thesis.comments}"></td>
+            <td th:text="${thesis.student.personId}"></td>
+            <td th:text="${thesis.personel.personId}"></td>
+            <td>
+                <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="post">
+                     <input type="submit" value="Delete"/>
+                </form>
+            </td>
         </tr>
     </table>
     

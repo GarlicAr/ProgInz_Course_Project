@@ -22,7 +22,7 @@ public class ThesisCRUDService implements IThesisCRUDService {
     
     
     @Override
-    public void insertNewThesis(Thesis thesis) throws Exception {
+    public void insertNewThesis(Thesis thesis) {
         for (Thesis temp : selectAllThesis()) {
             if (temp.getTitleLv().equals(thesis.getTitleLv()) &&
                 temp.getTitleEn().equals(thesis.getTitleEn()) &&
@@ -30,16 +30,10 @@ public class ThesisCRUDService implements IThesisCRUDService {
                 temp.getTasks().equals(thesis.getTasks()) &&
                 temp.getStudent().equals(thesis.getStudent()) &&
                 temp.getPersonel().equals(thesis.getPersonel())) {
-
-                thesisRepo.save(temp);
-                return;
+                throw new RuntimeException("Tēze jau eksistē");
             }
         }
-
-        Thesis newThesis = new Thesis(thesis.getTitleLv(), thesis.getTitleEn(), thesis.getAim(), thesis.getTasks(),
-            thesis.getStudent(), thesis.getPersonel());
-
-        thesisRepo.save(newThesis);
+        thesisRepo.save(thesis);
     }
 
 
@@ -53,20 +47,10 @@ public class ThesisCRUDService implements IThesisCRUDService {
         throw new Exception("Neparizes thesis_id");
     }
 
-    @Override
-    public void deleteThesis(long thesis_id) throws Exception {
-    	boolean isFound = false;
-    	for(Thesis temp : selectAllThesis()) {
-    		if(temp.getThesis_id() == thesis_id) {
-    		 selectAllThesis().remove(temp);
-    		 isFound = true;
-    		 break;
-    		}
-    	}
-    	if(!isFound) {		
-			throw new Exception("Nepareizs thesis_id");
-		}
+    public void deleteThesis(long thesis_id) {
+        thesisRepo.deleteById(thesis_id);
     }
+
 
     @Override
     public void updateThesis(Thesis inputThesis) throws Exception {

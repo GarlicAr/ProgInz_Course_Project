@@ -38,15 +38,15 @@ public class StudentController {
     }
 
     @GetMapping("/remove/{matriculaNo}")
-    public String removeStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, Model model) {
+    public String removeStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo) {
         try {
             studentService.deleteStudentByMatriculaNo(matriculaNo);
-            model.addAttribute("myAllStudents", studentService.selectAllStudents());
-            return "student-all-page";
+            return "redirect:/student/showAll";
         } catch (Exception e) {
             return "error-page";
         }
     }
+
 
     @GetMapping("/insertNew")
     public String insertNewStudent(Student student) {

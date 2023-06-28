@@ -36,13 +36,13 @@ public class ThesisController {
         }
     }
 
-    @GetMapping("/remove/{thesis_id}")
-    public String removeThesisById(@PathVariable("thesis_id") long thesis_id, Model model) {
+    @PostMapping("/remove/{thesis_id}")
+    public String removeThesisById(@PathVariable("thesis_id") long thesis_id) {
         try {
             thesisService.deleteThesis(thesis_id);
-            model.addAttribute("myAllTheses", thesisService.selectAllThesis());
-            return "thesis-all-page";
+            return "redirect:/thesis/showAll";
         } catch (Exception e) {
+            e.printStackTrace();
             return "error-page";
         }
     }
@@ -57,14 +57,17 @@ public class ThesisController {
         if (!result.hasErrors()) {
             try {
                 thesisService.insertNewThesis(thesis);
-            } catch (Exception e) {
+                return "redirect:/thesis/showAll";
+            } catch (RuntimeException e) {
                 return "error-page";
             }
-            return "redirect:/thesis/showAll";
         } else {
+            // Print the binding result errors for debugging purposes
+            System.out.println(result.getAllErrors());
             return "error-page";
         }
     }
+
 
     @GetMapping("/update/{thesis_id}")
     public String showUpdateForm(@PathVariable("thesis_id") long thesis_id, Model model) {

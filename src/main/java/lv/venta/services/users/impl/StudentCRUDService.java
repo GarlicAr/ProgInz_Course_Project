@@ -34,23 +34,24 @@ public class StudentCRUDService implements IStudentCRUDService{
 	
 	@Override
 	public void deleteStudentByMatriculaNo(String matriculaNo) throws Exception {
-		boolean isFound = false;
-		for (Student temp : selectAllStudents()) {
-			if(temp.getMatriculaNo().equals(matriculaNo)) {
-				selectAllStudents().remove(temp);
-				isFound = true;
-				break;
-			}
-		} 
-		if(!isFound) {		
-			throw new Exception("Nepareizs matrikulasNo");
-		}
+	    Student studentToDelete = null;
+	    for (Student temp : selectAllStudents()) {
+	        if(temp.getMatriculaNo().equals(matriculaNo)) {
+	            studentToDelete = temp;
+	            break;
+	        }
+	    } 
+	    if(studentToDelete != null) {
+	        studentRepo.delete(studentToDelete);
+	    } else {
+	        throw new Exception("Nepareizs matrikulasNo");
+	    }
 	}
 	@Override
 	public void insertNewStudent(Student student) {
 	    for(Student temp : selectAllStudents()) {
 	        if(temp.getMatriculaNo().equals(student.getMatriculaNo())) {
-	            throw new RuntimeException("A student with this matricula number already exists.");
+	            throw new RuntimeException("Students ar šādu matrikulas numuru jau eksistē");
 	        }
 	    }
 	    studentRepo.save(student);

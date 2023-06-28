@@ -6,7 +6,7 @@ import lv.venta.models.Thesis;
 
 public interface IThesisCRUDService {
 
-	void insertNewThesis(Thesis thesis) throws Exception;
+	void insertNewThesis(Thesis thesis);
 	
 	Thesis selectThesisById(long id) throws Exception;
 	

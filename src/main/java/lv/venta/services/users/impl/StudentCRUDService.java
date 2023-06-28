@@ -7,20 +7,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lv.venta.models.users.User;
 import lv.venta.models.users.Student;
 import lv.venta.repos.users.IRepoStudent;
+import lv.venta.repos.users.IRepoUser;
 import lv.venta.services.users.IStudentCRUDService;
 
 @Service
 public class StudentCRUDService implements IStudentCRUDService{
 
-
+	@Autowired
+	IRepoUser userRepo;
 	@Autowired
 	IRepoStudent studentRepo;
 	@Override
 	public ArrayList<Student> selectAllStudents() {
 		return (ArrayList<Student>) studentRepo.findAll();
 	}
+	@Override
+	public List<User> getAllUsers() {
+	    return (List<User>) userRepo.findAll();
+	}
+
 	
 	@Override
 	public Student selectStudentByMatriculaNo(String matriculaNo) throws Exception {

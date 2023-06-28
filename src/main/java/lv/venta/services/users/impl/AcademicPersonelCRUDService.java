@@ -27,6 +27,15 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 		
 		return (List<Academic_personel>) personelRepo.findAll();
 	}
+	
+	public void insertNewPersonel(Academic_personel personel) {
+		
+		if(findById(personel.getPersonId() )== null) {
+
+			
+			personelRepo.save(personel);
+		}
+	}
 
 	@Override
 	public void addPersonelByUser(User user, Degree degree) throws Exception {
@@ -61,13 +70,10 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 	public void deletePersonelById(long id) throws Exception {
 		
 	try {
-		for(Academic_personel temp: getAll()) {
-			if(temp.getPersonId() == id) {
-				
-				personelRepo.delete(temp);
-				
-			}
-		}
+		
+		//TODO Pie Delete, nonemt visus komentarus, nonemt reviewers
+		
+		 personelRepo.delete(findById(id));  
 		
 	}
 	catch (Exception e) {
@@ -120,6 +126,33 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 	catch (Exception e) {
 		throw new Exception("Id nav personāls vai neeksistē!");
 	}
+	}
+
+	@Override
+	public Academic_personel findById(long id) {
+		
+		Academic_personel newPersonel = new Academic_personel();
+		
+		try {
+			
+			for(Academic_personel temp : getAll()) {
+				if(temp.getPersonId() == id) {
+					
+					newPersonel = temp;
+					
+					return newPersonel;
+					
+				}
+			}
+			
+			
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;
 	}
 
 }

@@ -62,6 +62,20 @@
             background-color: #4CAF50;
             color: #fff;
         }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            padding-top: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
     </style>
 </head>
 <body>
@@ -83,6 +97,7 @@
             <th>Grāds</th>
             <th>Kursa Darba ID</th>
             <th>Komentāra ID</th>
+            <th>Darbibas</th>
         </tr>
         <tr th:each="personel : ${personel}">
             <td th:text="${personel.personId}"></td>
@@ -95,9 +110,19 @@
             <td>
                 <span th:each="comment : ${personel.comments}" th:text="${comment.comment_id}"></span>
             </td>
+
+            <td>
+                <a th:href="@{/personel/showOne/{id}(id=${personel.personId})}">Apskatities</a>
+            </td>
         </tr>
         
     </table>
+
+
+    <a class="btn" th:href="@{/personel/add}">Pievienot Jaunu</a>
+
+    
+
 </div>
         
 

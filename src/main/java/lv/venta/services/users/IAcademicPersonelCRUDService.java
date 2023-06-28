@@ -17,6 +17,8 @@ public interface IAcademicPersonelCRUDService {
 	
 	List<Thesis> findThesisByAcademicPersonelId(long id) throws Exception;
 	
+	Academic_personel findById(long id);
+	
 	
 	void addPersonelByUser(User user, Degree degree) throws Exception;
 	

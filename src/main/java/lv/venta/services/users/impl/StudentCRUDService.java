@@ -49,22 +49,13 @@ public class StudentCRUDService implements IStudentCRUDService{
 	@Override
 	public void insertNewStudent(Student student) {
 	    for(Student temp : selectAllStudents()) {
-	        if(temp.getPersonName().equals(student.getPersonName()) && 
-	           temp.getSurname().equals(student.getSurname()) &&
-	           temp.getPersonalCode().equals(student.getPersonalCode()) && 
-	           temp.getUser().getUser_id()==student.getUser().getUser_id() &&
-	           temp.getMatriculaNo().equals(student.getMatriculaNo()) &&
-	           temp.isDebt() == student.isDebt()) {
-	            studentRepo.save(temp);
+	        if(temp.getMatriculaNo().equals(student.getMatriculaNo())) {
+	            throw new RuntimeException("A student with this matricula number already exists.");
 	        }
 	    }
-
-	    Student newStudent = new Student(student.getPersonName(), student.getSurname(), 
-	                                     student.getPersonalCode(), student.getUser(), 
-	                                     student.getMatriculaNo(), student.isDebt());
-
-	    studentRepo.save(newStudent);
+	    studentRepo.save(student);
 	}
+
 
 	@Override
 	public void updateStudentByMatriculaNo(String matriculaNo, Student inputStudent) throws Exception {

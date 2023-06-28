@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Project</title>
+    <style>
+       body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #4CAF50;
+            color: #333;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="container">
+            <form th:action="@{/student/insertNew}" th:object="${student}" method="post">
+                <label for="personName">Vārds</label>
+                <input type="text" id="personName" th:field="*{personName}" name="personName" required>
+
+                <label for="surname">Uzvārds</label>
+                <input type="text" id="surname" th:field="*{surname}" name="surname" required>
+
+                <label for="personalCode">Personas kods</label>
+                <input type="text" id="personalCode" th:field="*{personalCode}" name="personalCode" required>
+
+                <label for="matriculaNo">Matrikulas numurs</label>
+                <input type="text" id="matriculaNo" th:field="*{matriculaNo}" name="matriculaNo" required>
+
+                <label for="isDebt">Ir parādi</label>
+                <input type="checkbox" id="isDebt" th:checked="${student.Debt}" name="isDebt">
+				<input type="hidden" th:field="*{Debt}">
+
+
+
+                <button type="submit">Insert New Student</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

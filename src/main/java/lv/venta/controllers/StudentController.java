@@ -53,7 +53,7 @@ public class StudentController {
         return "student-add-page";
     }
 
-    @PostMapping("/inserNew")
+    @PostMapping("/insertNew")
     public String insertNewStudent(@Valid Student student, BindingResult result) {
         if (!result.hasErrors()) {
             studentService.insertNewStudent(student);

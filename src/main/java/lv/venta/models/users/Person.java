@@ -37,17 +37,18 @@ public class Person {
 	@Column(name = "name")
 	@NotNull
 	@Size(min = 3, max = 15)
-	@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
 	private String personName;
 	
 	@Column(name = "surname")
 	@NotNull
 	@Size(min = 3, max = 15)
-	@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
 	private String surname;
 	
 	
 	@Column(name = "personalCode")
+	@Pattern(regexp = "[0-9]{6}-[0-9]{5}", message = "Neatbilstošs personas kods")
 	@NotNull
 	private String personalCode;
 	

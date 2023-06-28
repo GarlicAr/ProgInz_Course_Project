@@ -42,42 +42,35 @@ public class HomeController {
 	}
 	
 	@PostMapping("/login")
-	private String loginPost(@RequestParam("email") String email,@RequestParam("password") String password, Model model) {
-	   
-	    try {
-	    	
-	        User temp = userService.findByEmail(email);
-	        
-	        System.out.println(temp);
-	        
-	        if (temp != null) {
-	            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	            
-	            System.out.println(password + " ======== "  +  temp.getPassword());
-	            
-	            if (passwordEncoder.matches(password, temp.getPassword())) {
-	            	
-	            	//====================================================
-	            	//Authenticatiom + sesion
-	            	
-	            	
-	                model.addAttribute("person", temp.getPerson());
-	                return "index";
-	            } else {
-	                model.addAttribute("error_message", "Incorrect password or email");
-	                return "login";
-	            }
-	        } else {
-	            model.addAttribute("error_message", "Incorrect password or email");
-	            return "login";
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    
-	    model.addAttribute("user", new User());
-	    
-	    return "error-page";
+	private String loginPost(@RequestParam("email") String email, @RequestParam("password") String password,
+			Model model) {
+
+		try {
+
+			User temp = userService.findByEmail(email);
+
+			if (temp != null) {
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+				if (passwordEncoder.matches(password, temp.getPassword())) {
+
+					model.addAttribute("person", temp.getPerson());
+					return "index";
+				} else {
+					model.addAttribute("error_message", "Incorrect password or email");
+					return "login";
+				}
+			} else {
+				model.addAttribute("error_message", "Incorrect password or email");
+				return "login";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute("user", new User());
+
+		return "error-page";
 	}
 
 	

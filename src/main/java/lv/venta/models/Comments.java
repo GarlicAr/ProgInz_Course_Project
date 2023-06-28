@@ -30,7 +30,7 @@ public class Comments {
 	@Id
 	@Setter(value = AccessLevel.NONE)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long comment_id;
+	public Long comment_id;
 	
 	@Column(name = "comment")
 	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")

@@ -38,26 +38,19 @@
     <div class="navbar">
         <a href="/home">Home</a>
         <a href="/about">About</a>
-        <a href="/login" id="login-link">Login</a>
-        <a href="/register" id="register-link">Register</a>
+        <a href="/personel/showAll">Personel</a>
     </div>
 
    <!-- Main content -->
     <div class="content">
         <h1>Kursa projekts</h1>
-        <p>Welcome, <span th:if="${person != null}" th:text="${person.getPersonName()}"></span>!</p>
 
     </div>
 
 
     
     <script>
-        var loginLink = document.getElementById("login-link");
-        var person = "[[${person}]]";
-
-        if (person !== null && person !== '') {
-        loginLink.style.display = "none";
-    }
+ 
 
     </script>
     

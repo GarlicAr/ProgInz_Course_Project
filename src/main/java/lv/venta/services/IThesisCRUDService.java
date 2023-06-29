@@ -1,13 +1,9 @@
 package lv.venta.services;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import lv.venta.models.Thesis;
 
 public interface IThesisCRUDService {
-    
-    public List<Thesis> getAll();
+
 
     void insertNewThesis(Thesis thesis);
     

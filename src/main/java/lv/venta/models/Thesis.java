@@ -117,8 +117,12 @@ public class Thesis {
 		}
 	}
 
-	public Thesis(String titleLv, String titleEn, String aim, String tasks, Student student,
-			Academic_personel personel) {
+	public Thesis(
+			@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") @Size(min = 5, max = 25) String titleLv,
+			@Pattern(regexp = "[A-Z]{1}[a-z\\ ]+", message = "Pirmajam burtam jābūt lielajam") @Size(min = 5, max = 25) String titleEn,
+			@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String aim,
+			@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String tasks,
+			Student student, Academic_personel personel) {
 		super();
 		this.titleLv = titleLv;
 		this.titleEn = titleEn;
@@ -129,7 +133,7 @@ public class Thesis {
 		this.submitDate = LocalDateTime.now();
 		this.status = Status.Submitted;
 	}
-	
+
 	
 
 }

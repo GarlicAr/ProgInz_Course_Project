@@ -86,7 +86,7 @@ public class CommentController {
 		
 		Comments com = new Comments(
 				comments.getText(), 
-				//comments.getDate(),
+				comments.getDate(),
 				comments.getPersonel(), 
 				comments.getThesis());
 		

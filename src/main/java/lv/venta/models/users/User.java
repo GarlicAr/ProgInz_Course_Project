@@ -33,7 +33,7 @@ public class User {
 	private String password;
 	
 	@Column(name = "email")
-	@Pattern(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}", message = "Pirmajam burtam jābūt mazajam")
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam")
 	@NotNull
 	private String email;
 	
@@ -41,14 +41,10 @@ public class User {
 	@ToString.Exclude
 	private Person person;
 	
-	
-
-	public User(@NotNull String password,
-			@NotNull @Size(min = 3, max = 15) String email) {
-		
-		setPassword(password);
+	public User(
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam") @NotNull String email) {
+		super();
 		this.email = email;
-		
 	}
 	
 
@@ -60,6 +56,9 @@ public class User {
 		this.password = passwordEncoder.encode(password);
 		
 	}
+
+
+
 	
 	
 	

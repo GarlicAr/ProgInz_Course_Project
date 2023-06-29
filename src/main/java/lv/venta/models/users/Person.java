@@ -56,20 +56,17 @@ public class Person {
 	@JoinColumn(name = "id_user")
 	private User user;
 
-	public Person(@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String name,
-			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String surname,
-			@Size(min = 12, max = 12) @NotNull @Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstoss personas kods") String personalCode,
+	public Person(
+			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String personName,
+			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
+			@Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstošs personas kods") @NotNull String personalCode,
 			User user) {
-		this.personName = name;
+		super();
+		this.personName = personName;
 		this.surname = surname;
 		this.personalCode = personalCode;
 		this.user = user;
 	}
-	
-	
-
-
-	
 	
 	
 }

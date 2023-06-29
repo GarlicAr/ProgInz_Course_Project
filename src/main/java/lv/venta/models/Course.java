@@ -56,22 +56,30 @@ public class Course {
 	@ManyToMany(mappedBy = "debtCourses")
 	private Collection<Student> studentsWithDebt = new ArrayList<>();
 
+//	public Course(
+//			@Size(min = 5, max = 25) String title, 
+//			@Min(1) @Max(4) int creditPoints) {
+//
+//		this.title = title;
+//		this.creditPoints = creditPoints;
+//	}
+	
 	public Course(
-			@Size(min = 5, max = 25) String title, 
-			@Min(1) @Max(4) int creditPoints) {
-
-		this.title = title;
-		this.creditPoints = creditPoints;
-
-
+		@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") @Size(min = 5, max = 25) String title,
+		@Min(1) @Max(4) int creditPoints) {
+	this.title = title;
+	this.creditPoints = creditPoints;
 	}
+	
 	
 	public void addStudent(Student student) {
 		if(!studentsWithDebt.contains(student)) {
 			studentsWithDebt.add(student);
 		}
 	}
+
+}
 	
 	//TODO Remove
 
-}
+

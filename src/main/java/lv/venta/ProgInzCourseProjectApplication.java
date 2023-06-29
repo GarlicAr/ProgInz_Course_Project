@@ -1,5 +1,7 @@
 package lv.venta;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -46,10 +48,10 @@ public class ProgInzCourseProjectApplication {
 				// TODO Auto-generated method stub
 				
 				//Users
-				User user1 = new User("123", "test@test.com");
-				User user2 = new User("123", "test1@test.com");
-				User user3 = new User("123", "test2@test.com");
-				User user4 = new User("123", "test3@test.com");
+				User user1 = new User("test0@test.com");
+				User user2 = new User("test1@test.com");
+				User user3 = new User("test2@test.com");
+				User user4 = new User("test3@test.com");
 				userRep.save(user1);
 				userRep.save(user2);
 				userRep.save(user3);
@@ -95,7 +97,7 @@ public class ProgInzCourseProjectApplication {
 				
 				
 				//Comments
-				Comments comm1 = new Comments("Lielisks darbs!", ac1, th1);
+				Comments comm1 = new Comments("Lielisks darbs!",LocalDateTime.now(), ac1, th1);
 				commentsRep.save(comm1);
 				
 				

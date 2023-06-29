@@ -24,10 +24,16 @@ public class User {
 	
 	
 	@Column(name = "password")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Jābūt vismaz 8 simbolus garai.\r\n"
+			+ "Jāsatur vismaz viena maza burta rakstzīme.\r\n"
+			+ "Jāsatur vismaz viena liela burta rakstzīme.\r\n"
+			+ "Jāsatur vismaz viena cipara rakstzīme.\r\n"
+			+ "Jāsatur vismaz viena īpaša rakstzīme (@, $, !, %, *, ?, &).")
 	@NotNull
 	private String password;
 	
 	@Column(name = "email")
+	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam")
 	@NotNull
 	private String email;
 	
@@ -35,14 +41,10 @@ public class User {
 	@ToString.Exclude
 	private Person person;
 	
-	
-
-	public User(@NotNull String password,
-			@NotNull @Size(min = 3, max = 15) String email) {
-		
-		setPassword(password);
+	public User(
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam") @NotNull String email) {
+		super();
 		this.email = email;
-		
 	}
 	
 
@@ -54,6 +56,9 @@ public class User {
 		this.password = passwordEncoder.encode(password);
 		
 	}
+
+
+
 	
 	
 	

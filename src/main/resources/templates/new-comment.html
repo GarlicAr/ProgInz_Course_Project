@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Project</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .container input[type="text"],
+        .container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .container input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+        <a href="/register" id="register-link">Register</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+            
+            <div class="container">
+            <form action="/comments/add" method="POST" th:object="${comment}">
+                <div>
+                    <label for="id_Comment">id_Comment:</label>
+                    <input type="text" id="id_Comment" name="id_Comment" th:field="*{id_Comment}" required>
+                    <span th:if="${#fields.hasErrors('id_Comment')}" th:errors="*{id_Comment}"></span>
+                </div>
+                <div>
+                    <label for="Comment">Comment:</label>
+                    <input type="text" id="Comment" name="Comment" th:field="*{Comment}" required>
+                    <span th:if="${#fields.hasErrors('Comment')}" th:errors="*{Comment}"></span>
+                </div>
+                <div>
+                    <label for="id_Personel">id_Personel:</label>
+                    <input type="text" id="id_Personel" name="id_Personel" th:field="*{id_Personel}" required>
+                    <span th:if="${#fields.hasErrors('id_Personel')}" th:errors="*{id_Personel}"></span>
+                </div>
+                <div>
+                     <label for="thesis_id">thesis_id:</label>
+                    <input type="text" id="thesis_id" name="thesis_id" th:field="*{thesis_id}" required>
+                    <span th:if="${#fields.hasErrors('thesis_id')}" th:errors="*{thesis_id}"></span>
+                </div>
+                <button type="submit" class="btn">Create</button>
+            </form>
+        </div>
+
+    
+    <script>
+     
+    </script>
+    
+</body>
+</html>

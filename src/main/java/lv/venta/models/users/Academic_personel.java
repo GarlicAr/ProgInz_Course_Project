@@ -37,21 +37,23 @@ public class Academic_personel extends Person{
 	
 	@OneToMany(mappedBy = "personel")
 	private Collection<Comments> comments;
-
-	public Academic_personel(@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String name,
-			 @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String surname,
-			 @NotNull String personalCode,
-			User user, Degree degree) {
-		super(name, surname, personalCode, user);
-		this.degree = degree;
-	}
 	
+	public Academic_personel(@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String name,
+		@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String surname,
+		@Size(min = 12, max = 12) @NotNull @Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstoss personas kods") String personalCode,
+		User user, Degree degree) {
+	super(name, surname, personalCode, user);
+	this.degree = degree;
+	}
 	
 	public void addThesisForReview(Thesis thesis) {
 		if(!ThesisForReview.contains(thesis)) {
 			ThesisForReview.add(thesis);
 		}
 	}
-	
+
 
 }
+	
+
+

@@ -12,12 +12,6 @@ import lv.venta.services.IThesisCRUDService;
 @Service
 public class ThesisCRUDService implements IThesisCRUDService{
 
-	@Autowired
-	IRepoThesis thesisRepo;
-	
-	@Override
-	public List<Thesis> getAll() {
-		return (List<Thesis>) thesisRepo.findAll();
-	}
+
 
 }

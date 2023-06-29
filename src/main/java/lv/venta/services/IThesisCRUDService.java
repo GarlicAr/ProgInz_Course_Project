@@ -6,6 +6,6 @@ import lv.venta.models.Thesis;
 
 public interface IThesisCRUDService {
 	
-	public List<Thesis> getAll();
+
 
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class Comments {
 	public Long comment_id;
 	
 	@Column(name = "comment")
+	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
 	private String text;
 	
 	@Column(name = "date")
@@ -45,13 +47,17 @@ public class Comments {
 	@JoinColumn(name = "thesis_id")
 	private Thesis thesis;
 
-	public Comments(String text, Academic_personel personel, Thesis thesis) {
+	public Comments(
+			@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String text,
+			LocalDateTime date, Academic_personel personel, Thesis thesis) {
 		super();
 		this.text = text;
+		this.date = LocalDateTime.now();
 		this.personel = personel;
 		this.thesis = thesis;
-		this.date = LocalDateTime.now();
 	}
+
+
 	
 	
 	

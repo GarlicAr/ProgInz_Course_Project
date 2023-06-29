@@ -112,59 +112,58 @@
             <h2>Vadības informācija</h2>
             <div>
                 <label>ID:</label>
-                <span th:text="${personel.personId}"></span>
+                <span th:text="${comments.comment_id}"></span>
             </div>
             <div>
-                <label>Vārds:</label>
-                <span th:text="${personel.personName}"></span>
+                <label>Comment:</label>
+                <span th:text="${comments.text}"></span>
             </div>
             <div>
-                <label>Uzvārds:</label>
-                <span th:text="${personel.surname}"></span>
+                <label>Date:</label>
+                <span th:text="${comments.date}"></span>
             </div>
-            <div>
-                <label>Grāds:</label>
-                <span th:text="${personel.degree}"></span>
-            </div>
+            <!-- <div>
+                <label>Personel ID:</label>
+                <span th:each="comment : ${comments.personel}" th:text="${personel.personel_id}"></span>
+            </div> -->
 
             <div class="comments-container" th:if="${not #lists.isEmpty(personel.comments)}">
-                <h2>Komentāri</h2>
+                <h2>Personel</h2>
                 <table>
                     <tr>
-                        <th>Komentāra ID</th>
-                        <th>Komentārs</th>
+                        <th>Personel ID</th>
+                        <th>Personel</th>
                     </tr>
-                    <tr th:each="comment : ${personel.comments}">
-                        <td th:text="${comment.comment_id}"></td>
-                        <td th:text="${comment.text}"></td>
+                    <tr th:each="personel : ${comments.personel}">
+                        <td th:text="${personel.personel_id}"></td>
+                        <td th:text="${personel.text}"></td>
                     </tr>
                 </table>
-                
-            </div>
-
-            <div class="message" th:if="${#lists.isEmpty(personel.comments)}">
-                Nav pieejami komentari!
+                <div class="message" th:if="${#lists.isEmpty(comments.personel)}">
+                    No personels available!
+                </div>
             </div>
 
 
             <div class="thesis-container" th:if="${not #lists.isEmpty(personel.thesis)}">
-                <h2>Gala Darbi</h2>
+                <h2>Thesis</h2>
                 <table>
                     <tr>
-                        <th>Gala darba ID</th>
+                        <th>Thesis ID</th>
+                        <th>Thesis</th>
                     </tr>
-                    <tr th:each="thesis : ${personel.thesis}">
+                    <tr th:each="thesis : ${comments.thesis}">
                         <td th:text="${thesis.thesis_id}"></td>
+                        <td th:text="${thesis.text}"></td>
                     </tr>
                 </table>
-                
+                <div class="message" th:if="${#lists.isEmpty(comments.thesis)}">
+                    No thesis are available!
+                </div>
             </div>
 
-            <div class="message" th:if="${#lists.isEmpty(personel.thesis)}">
-                Nav pieejami darbi!
-            </div>
-
-            <form th:action="@{/personel/delete/{id}(id=${personel.personId})}" method="GET">
+            <form th:action="@{/comments/delete/{__id__}(id=${comments.comment_id})}" method="POST">
+                <input type="hidden" name="_method" value="DELETE" />
                 <button type="submit" class="delete-button">Delete</button>
             </form>
             

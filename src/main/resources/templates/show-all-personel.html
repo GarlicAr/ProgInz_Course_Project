@@ -82,7 +82,11 @@
     <!-- Navigation bar -->
     <div class="navbar">
         <a href="/home">Home</a>
-        <a href="/about">About</a>
+        <a href="/personel/showAll">Personel</a>
+        <a href="/courses/showAll">Courses</a>
+        <a href="/thesis/showAll">Theses</a>
+        <a href="/comments/showAll">Comments</a>
+        <a href="/student/showAll">Students</a>
     </div>
 
    <!-- Main content -->
@@ -105,10 +109,17 @@
             <td th:text="${personel.surname}"></td>
             <td th:text="${personel.degree}"></td>
             <td>
-                <span th:each="thesis : ${personel.thesis}" th:text="${thesis.thesis_id}"></span>
+                <span th:each="thesis, iterStat : ${personel.thesis}">
+                    <span th:text="${thesis.thesis_id}"></span>
+                    <span th:if="${!iterStat.last}">, </span>
+                </span>
+                 
             </td>
             <td>
-                <span th:each="comment : ${personel.comments}" th:text="${comment.comment_id}"></span>
+                 <span th:each="comment, iterStat : ${personel.comments}">
+                    <span th:text="${comment.comment_id}"></span>
+                    <span th:if="${!iterStat.last}">, </span>
+                </span>
             </td>
 
             <td>

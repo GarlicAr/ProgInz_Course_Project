@@ -62,6 +62,20 @@
             background-color: #4CAF50;
             color: #fff;
         }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            padding-top: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
     </style>
 </head>
 <body>
@@ -78,45 +92,40 @@
    <!-- Main content -->
     <div class="content">
         
-
-<div class="container" th:if="${ not#lists.isEmpty(thesis)}">
+<div class="container" th:if="${ not#lists.isEmpty(comments)}">
     <table>
         <tr>
             <th>ID</th>
-            <th>Nosaukums latviski</th>
-            <th>Nosaukums angliski</th>
-            <th>Mērķis</th>
-            <th>Uzdevums</th>
-            <th>Iesniegsanas datums</th>
-            <th>Supervisor statuss</th>
-            <th>Statuss</th>
-            <th>Apstirpināšanas datums</th>
-            <th>Studenta ID</th>
-            <th>Personāža ID</th>
-            <th>Komentāri</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Personel ID</th>
+            <th>Thesis ID</th>
         </tr>
-        <tr th:each="thesis : ${thesis}">
-            <td th:text="${thesis.thesis_id}"></td>
-            <td th:text="${thesis.titleLv}"></td>
-            <td th:text="${thesis.titleEn}"></td>
-            <td th:text="${thesis.aim}"></td>
-            <td th:text="${thesis.tasks}"></td>
-            <td th:text="${thesis.submitDate}"></td>
-            <td th:text="${thesis.statusFromSupervisor}"></td>
-            <td th:text="${thesis.status}"></td>
-            <td th:text="${thesis.acceptedDate}"></td>
-            <td th:text="${thesis.student.personId}"></td>
+        <tr th:each="comments : ${comments}">
+            <td th:text="${comments.comment_id}"></td>
+            <td th:text="${comments.text}"></td>
+            <td th:text="${comments.date}"></td>
+            <!--<td th:text="${comments.personel}"></td>-->
+            <!--<td th:text="${comments.thesis}"></td>-->
             <td>
-                <span th:each="personel : ${thesis.personel}" th:text="${personel.getPersonId()}"></span>
+                <span th:each="thesis : ${comments.thesis}" th:text="${thesis.thesis_id}"></span>
             </td>
             <td>
-                <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="post">
-                     <input type="submit" value="Delete"/>
-                </form>
+                <span th:each="comment : ${comments.personel}" th:text="${personel.personel_id}"></span>
+            </td>
+
+            <td>
+                <a th:href="@{/comments/showOne/{id}(id=${comments.comment_id})}">Apskatities</a>
             </td>
         </tr>
+        
     </table>
+
+
+    <a class="btn" th:href="@{/comments/add}">Pievienot Jaunu komentāru</a>
+
     
+
 </div>
         
 

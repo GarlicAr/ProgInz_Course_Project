@@ -12,7 +12,11 @@ import lv.venta.models.Thesis;
 import lv.venta.models.users.Academic_personel;
 import lv.venta.models.users.Person;
 import lv.venta.models.users.User;
+import lv.venta.repos.IRepoComments;
+import lv.venta.repos.IRepoThesis;
 import lv.venta.repos.users.IRepoAcademicPersonel;
+import lv.venta.services.impl.CommentsCRUDService;
+import lv.venta.services.impl.ThesisCRUDService;
 import lv.venta.services.users.IAcademicPersonelCRUDService;
 
 
@@ -21,6 +25,18 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 	
 	@Autowired
 	IRepoAcademicPersonel personelRepo;
+	
+	@Autowired
+	IRepoComments commentsRepo;
+	
+	@Autowired
+	IRepoThesis thesisRepo;
+	
+	@Autowired
+	CommentsCRUDService commentsService;
+	
+	@Autowired
+	ThesisCRUDService thesisService;
 
 	@Override
 	public List<Academic_personel> getAll() {
@@ -70,15 +86,48 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 	public void deletePersonelById(long id) throws Exception {
 		
 	try {
+		if(findById(id)!= null) {			
+			for(Academic_personel temp: getAll()) {
+				if(temp.getPersonId() == id) {
+					
+					
+					for(Comments comment: commentsService.getAll()) {
+						if(comment.getPersonel().getPersonId() == id) {
+							comment.setPersonel(null);
+							
+							commentsRepo.save(comment);
+						}
+					}
+					
+					for(Thesis thesis: thesisService.selectAllThesis()) {
+						if(thesis.getPersonel().getPersonId() == id) {
+							thesis.setPersonel(null);
+							
+							thesisRepo.save(thesis);
+						}
+					}
+					
+					personelRepo.delete(temp);
+					
+					
+					
+				}
+			}
+			
+			
+		}
+		else {
+			throw new Exception("Persona netika atrasta!");
+		}
 		
-		//TODO Pie Delete, nonemt visus komentarus, nonemt reviewers
 		
-		 personelRepo.delete(findById(id));  
+		
+
 		
 	}
 	catch (Exception e) {
 		
-		throw new Exception("Person is not personel!");
+	
 		
 	}
 		

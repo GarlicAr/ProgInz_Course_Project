@@ -56,13 +56,13 @@ public class Student extends Person{
 	private Collection<Thesis> thesis;
 	
 	public Student(
-			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String name,
-			@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-Z]{1}[a-z\\ ]+") String surname,
-			@Size(min = 12, max = 12) @NotNull @Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstoss personas kods") String personalCode,
-			User user, @NotNull @Pattern(regexp = "[0-9]{8,20}") String matriculaNo) {
-		super(name, surname, personalCode, user);
-		this.matriculaNo = matriculaNo;
 
+		@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String personName,
+		@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
+		@Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstošs personas kods") @NotNull String personalCode,
+		User user, @NotNull @Pattern(regexp = "[0-9]{8,20}") String matriculaNo) {
+	super(personName, surname, personalCode, user);
+	this.matriculaNo = matriculaNo;
 	}
 	
 	
@@ -72,9 +72,12 @@ public class Student extends Person{
 			debtCourses.add(course);
 		}
 	}
+
+
+}
 	
 	//TODO izveidot REMOVE debt 
 
 	
 	
-}
+

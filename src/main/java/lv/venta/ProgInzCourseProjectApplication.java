@@ -70,8 +70,8 @@ public class ProgInzCourseProjectApplication {
 				Academic_personel ac2 = new Academic_personel("Karlis", "Immers", "123455-00001", user2, Degree.master);
 				academicPersonelRep.save(ac1);
 				academicPersonelRep.save(ac2);
-				Student student1 = new Student("Arvids", "Ivbuls", "203421-92342", user3, "123312321", false );
-				Student student2 = new Student("Zigis", "Celotajs", "422452-12343", user4, "00142422", true );
+				Student student1 = new Student("Arvids", "Ivbuls", "203421-92342", user3, "123312321");
+				Student student2 = new Student("Zigis", "Celotajs", "422452-12343", user4, "00142422");
 				student2.addDebtCourse(c1);
 				studentRep.save(student1);
 				studentRep.save(student2);

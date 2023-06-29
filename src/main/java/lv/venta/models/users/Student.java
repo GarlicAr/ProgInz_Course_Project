@@ -43,6 +43,9 @@ public class Student extends Person{
 	@Column(name = "isDebt")
 	private boolean Debt;
 
+	private boolean isDebt() {
+		return this.Debt;
+	}
 	@ManyToMany
 	@JoinTable(name = "student_debt_table",
 	joinColumns = @JoinColumn(name = "course_id"),
@@ -53,14 +56,15 @@ public class Student extends Person{
 	private Collection<Thesis> thesis;
 	
 	public Student(
+
 		@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String personName,
 		@NotNull @Size(min = 3, max = 15) @Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") String surname,
 		@Pattern(regexp = "[0-9]{6}-[0-9]{5}\\ ]+", message = "Neatbilstošs personas kods") @NotNull String personalCode,
-		User user, @NotNull @Pattern(regexp = "[0-9]{8,20}") String matriculaNo, boolean debt) {
+		User user, @NotNull @Pattern(regexp = "[0-9]{8,20}") String matriculaNo) {
 	super(personName, surname, personalCode, user);
 	this.matriculaNo = matriculaNo;
-	Debt = debt;
 	}
+	
 	
 	
 	public void addDebtCourse(Course course) {

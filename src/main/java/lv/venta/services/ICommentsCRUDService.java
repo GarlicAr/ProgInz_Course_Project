@@ -6,6 +6,10 @@ import lv.venta.models.Comments;
 import lv.venta.models.users.Student;
 
 public interface ICommentsCRUDService {
+	
+	public List<Comments> getAll();
+	
+	
 
 	ArrayList<Comments> selectAllComments();
 	

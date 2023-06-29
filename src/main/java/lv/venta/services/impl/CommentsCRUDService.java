@@ -1,5 +1,6 @@
 package lv.venta.services.impl;
 
+
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
@@ -7,8 +8,17 @@ import org.springframework.stereotype.Service;
 import lv.venta.models.Comments;
 import lv.venta.models.users.Person;
 import lv.venta.services.ICommentsCRUDService;
+
 @Service
 public class CommentsCRUDService implements ICommentsCRUDService{
+	
+	@Autowired
+	IRepoComments commentsRepo;
+
+	@Override
+	public List<Comments> getAll() {
+		return (List<Comments>) commentsRepo.findAll();
+	}
 
 	private ArrayList<Comments> commentsList;
 	

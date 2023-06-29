@@ -32,7 +32,7 @@ public class Person {
 	@Column(name = "id_person")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long personId;
+	public long personId;
 	
 	@Column(name = "name")
 	@NotNull

@@ -1,5 +1,6 @@
 package lv.venta.controllers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,14 +65,22 @@ public class CommentController {
 		
 	}
 	
-	@GetMapping("/Comments/add")
+	@GetMapping("/comments/add")
 	public String postComment(Model model) {
 		
+//	    Comments tempComments = new Comments();
+//	    
+//	    model.addAttribute("comments", tempComments);
 	    
-	    Comments tempComments = new Comments();
-	    
-	    model.addAttribute("comments", tempComments);
-	    
+	    ArrayList<Comments> comment = commentsService.selectAllComments();
+		
+		model.addAttribute("text", comment);
+		
+		model.addAttribute("date", LocalDateTime.now());
+		
+		model.addAttribute("id_Personel", comment);
+		
+		model.addAttribute("id_Thesis", comment);
 	    
 	    return "insert-new-comments";
 	}
@@ -94,7 +103,7 @@ public class CommentController {
 		commentsService.insertNewComments(com);
 		
 		
-		return "redirect:/personel/showAll";
+		return "redirect:/comments/showAll";
 	}
 	
 //	@GetMapping("/delete")

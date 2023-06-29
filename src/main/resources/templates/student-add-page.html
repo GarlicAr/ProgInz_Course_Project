@@ -73,21 +73,18 @@
     <div class="content">
         <div class="container">
             <form th:action="@{/student/insertNew}" th:object="${student}" method="post">
+
 				<div>
-					<label for="user">User:</label>
-	                    <select id="user" name="user.id" th:field="*{user}" required>
-	                        <option th:each="user : ${users}" th:value="${user.user_id}" th:text="${user.email}"></option>
-	                    </select>
+				    <label for="user">User:</label>
+				    <select id="user" name="user.id" th:field="*{user}" required>
+				        <option th:each="user : ${users}" th:value="${user.user_id}" th:text="${user.email}"></option>
+				    </select>
 				</div>
 				<div>
 	                <label for="matriculaNo">Matrikulas numurs</label>
 	                <input type="text" id="matriculaNo" th:field="*{matriculaNo}" name="matriculaNo" required>
 				</div>
-				<div>
-	                <label for="isDebt">Ir parādi</label>
-	                <input type="checkbox" id="isDebt" th:checked="${student.Debt}" name="isDebt">
-					<input type="hidden" th:field="*{Debt}">
-				</div>
+
                 <button type="submit">Pievienot jaunu Studentu</button>
             </form>
         </div>

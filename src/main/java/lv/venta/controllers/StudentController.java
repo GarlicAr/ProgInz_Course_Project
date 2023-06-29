@@ -56,7 +56,7 @@ public class StudentController {
 
 
     @GetMapping("/insertNew")
-    public String showAddStudentPage(Model model) {
+    public String insertNewStudent(Model model) {
         List<User> users = userService.allUsers(); // Fetch all users
         model.addAttribute("users", users);
         model.addAttribute("student", new Student());
@@ -64,9 +64,15 @@ public class StudentController {
     }
 
     @PostMapping("/insertNew")
-    public String insertNewStudent(@Valid Student student, BindingResult result) {
+    public String insertNewStudentPost(@Valid @ModelAttribute("student") Student student,@ModelAttribute("user") User user, BindingResult result) {
         if (!result.hasErrors()) {
-            studentService.insertNewStudent(student);
+        	Student stud = new Student(
+        			user.getPerson().getPersonName(),
+        			user.getPerson().getSurname(),
+        			user.getPerson().getPersonalCode(),
+        			user,
+        			student.getMatriculaNo());
+            studentService.insertNewStudent(stud);
             return "redirect:/student/showAll";
         } else {
             return "error-page";

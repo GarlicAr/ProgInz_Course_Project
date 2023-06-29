@@ -82,8 +82,7 @@
             <th>Uzvārds</th>
             <th>Personas kods</th>
             <th>Matrikulas numurs</th>
-            <th>Vai ir parādi</th>
-            <th>Parādi ID</th>
+
             
         </tr>
         <tr th:each="student : ${student}">
@@ -92,10 +91,7 @@
             <td th:text="${student.surname}"></td>
             <td th:text="${student.personalCode}"></td>
             <td th:text="${student.matriculaNo}"></td>
-            <td th:text="${student.isDebt}"></td>
-            <td th:if="${student.isDebt}">
-                <span th:each="course : ${student.debtCourses}" th:text="${course.courseId}"></span>
-            </td>
+
             <td>
                 <form th:action="@{/student/remove/{matriculaNo}(matriculaNo=${student.matriculaNo})}" th:method="post">
                     <input type="submit" value="Delete"/>

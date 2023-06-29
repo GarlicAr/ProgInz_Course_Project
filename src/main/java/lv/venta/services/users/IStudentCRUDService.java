@@ -14,7 +14,7 @@ public interface IStudentCRUDService {
 	
 	void deleteStudentByMatriculaNo(String matriculaNo) throws Exception;
 	
-	void insertNewStudent(Student student);
+	public void insertNewStudent(Student student);
 	
 	void updateStudentByMatriculaNo(String matriculaNo, Student student) throws Exception;
 

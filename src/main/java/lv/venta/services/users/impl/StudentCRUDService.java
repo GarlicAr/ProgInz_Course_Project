@@ -79,15 +79,11 @@ public class StudentCRUDService implements IStudentCRUDService{
 	        studentToUpdate.setPersonalCode(inputStudent.getPersonalCode());
 	        studentToUpdate.setUser(inputStudent.getUser());
 	        studentToUpdate.setMatriculaNo(inputStudent.getMatriculaNo());
-	        studentToUpdate.setDebt(inputStudent.isDebt());
 	        studentRepo.save(studentToUpdate);
 	    } else {
 	        throw new Exception("Nepareizs matrikulasNo");
 	    }
 	}
-
-		
 	
-		
 	
 }

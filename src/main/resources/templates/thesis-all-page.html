@@ -101,8 +101,8 @@
             <td th:text="${thesis.statusFromSupervisor}"></td>
             <td th:text="${thesis.status}"></td>
             <td th:text="${thesis.acceptedDate}"></td>
-            <td th:text="${thesis.student.personId}"></td>
-            <td th:text="${thesis.personel.personId}"></td>
+            <td th:text="${thesis.student}"></td>
+            <td th:text="${thesis.personel}"></td>
             <td>
                 <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="post">
                      <input type="submit" value="Delete"/>

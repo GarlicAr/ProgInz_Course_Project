@@ -99,7 +99,7 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 						}
 					}
 					
-					for(Thesis thesis: thesisService.getAll()) {
+					for(Thesis thesis: thesisService.selectAllThesis()) {
 						if(thesis.getPersonel().getPersonId() == id) {
 							thesis.setPersonel(null);
 							

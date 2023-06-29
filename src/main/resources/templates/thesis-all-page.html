@@ -106,7 +106,6 @@
             <th>Apstiprināšanas datums</th>
             <th>Studenta ID</th>
             <th>Personāža ID</th>
-            <th>Komentāra ID</th>
         </tr>
         <tr th:each="thesis : ${thesis}">
             <td th:text="${thesis.thesis_id}"></td>
@@ -118,7 +117,7 @@
             <td th:text="${thesis.statusFromSupervisor}"></td>
             <td th:text="${thesis.status}"></td>
             <td th:text="${thesis.acceptedDate}"></td>
-            <td th:text="${thesis.student.personId}"></td>
+
             <td>
                 <span th:each="personel : ${thesis.personel}" th:text="${personel.getPersonId()}"></span>
             </td>
@@ -128,11 +127,14 @@
                     <span th:if="${!iterStat.last}">, </span>
                 </span>
             </td>
-            <td>
-                <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="post">
-                     <input type="submit" value="Delete"/>
-                </form>
-            </td>
+			<td>
+			    <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="post">
+			         <input type="submit" value="Izdzēst"/>
+			    </form>
+			    <form th:action="@{/thesis/update/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="get">
+			         <input type="submit" value="Atjaunot"/>
+			    </form>
+			</td>
         </tr>
     </table>
     

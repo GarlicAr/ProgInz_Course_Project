@@ -70,26 +70,28 @@ public class ThesisController {
 
 
     @GetMapping("/update/{thesis_id}")
-    public String showUpdateForm(@PathVariable("thesis_id") long thesis_id, Model model) {
+    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, Model model) {
         try {
             Thesis thesis = thesisService.selectThesisById(thesis_id);
             model.addAttribute("thesis", thesis);
-            return "thesis-update-page";
+            return "update-thesis";
         } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
             return "error-page";
         }
     }
 
     @PostMapping("/update/{thesis_id}")
-    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, @Valid Thesis thesis, BindingResult result) {
+    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, @Valid Thesis thesis, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "thesis-update-page";
         } else {
             try {
                 thesisService.updateThesis(thesis);
-                return "redirect:/thesis/show/" + thesis.getThesis_id();
+                return "redirect:/thesis/showAll"; // redirect to showAll page after update
             } catch (Exception e) {
-                return "redirect:/error-page";
+                model.addAttribute("errorMessage", e.getMessage());
+                return "error-page";
             }
         }
     }

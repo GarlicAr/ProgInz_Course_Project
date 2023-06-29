@@ -93,7 +93,7 @@
 				<select id="statusFromSupervisor" th:field="*{statusFromSupervisor}" name="statusFromSupervisor" required>
 				    <option value="True">True</option>
 				    <option value="False">False</option>
-				    <!-- Add more options as needed -->
+
 				</select>
 				
 				<label for="status">Status</label>
@@ -103,14 +103,10 @@
 				    <option value="Rejected">Rejected</option>
 				    <option value="In_Review">In_Review</option>
 				    <option value="Submitted">Submitted</option>
-				    <!-- Add more options as needed -->
+
 				</select>
 
-                <!-- You need to implement a way to select the associated student and academic personnel -->
-                <!-- This could be dropdown lists, or text inputs for their IDs -->
 
-                <label for="comments">Komentāri</label>
-                <textarea id="comments" th:field="*{comments}" name="comments"></textarea>
 
                 <button type="submit">Pievienot jaunu Tēzi</button>
             </form>

@@ -33,14 +33,16 @@ public class StudentController {
 
     @GetMapping("/show/{matriculaNo}")
     public String showStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, Model model) {
-    	if(matriculaNo != null) {
-	        try {
-	            model.addAttribute("MyStudentByMatriculaNo", studentService.selectStudentByMatriculaNo(matriculaNo));
-	            return "student-one-page";
-	        } catch (Exception e) {
-	            return "error-page";
-	        }
-    	}return "error-page";
+        try {
+            Student student = studentService.selectStudentByMatriculaNo(matriculaNo);
+            if(student != null) {
+                model.addAttribute("MyStudentByMatriculaNo", student);
+                return "student-one-page";
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the error
+        }
+        return "error-page";
     }
 
     @GetMapping("/remove/{matriculaNo}")

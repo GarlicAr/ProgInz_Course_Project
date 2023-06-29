@@ -69,38 +69,48 @@
     <div class="navbar">
         <a href="/home">Home</a>
         <a href="/about">About</a>
-        <a href="/personel/showAll">Personel</a>
-        <a href="/courses/showAll">Courses</a>
     </div>
 
    <!-- Main content -->
     <div class="content">
         
-<div class="container" th:if="${ not#lists.isEmpty(student)}">
+
+<div class="container" th:if="${ not#lists.isEmpty(thesis)}">
     <table>
         <tr>
             <th>ID</th>
-            <th>Vārds</th>
-            <th>Uzvārds</th>
-            <th>Personas kods</th>
-            <th>Matrikulas numurs</th>
-
-            
+            <th>Nosaukums latviski</th>
+            <th>Nosaukums angliski</th>
+            <th>Mērķis</th>
+            <th>Uzdevums</th>
+            <th>Iesniegsanas datums</th>
+            <th>Supervisor statuss</th>
+            <th>Statuss</th>
+            <th>Apstirpināšanas datums</th>
+            <th>Studenta ID</th>
+            <th>Personāža ID</th>
+            <th>Komentāri</th>
         </tr>
-        <tr th:each="student : ${student}">
-            <td th:text="${student.personId}"></td>
-            <td th:text="${student.personName}"></td>
-            <td th:text="${student.surname}"></td>
-            <td th:text="${student.personalCode}"></td>
-            <td th:text="${student.matriculaNo}"></td>
-
+        <tr th:each="thesis : ${thesis}">
+            <td th:text="${thesis.thesis_id}"></td>
+            <td th:text="${thesis.titleLv}"></td>
+            <td th:text="${thesis.titleEn}"></td>
+            <td th:text="${thesis.aim}"></td>
+            <td th:text="${thesis.tasks}"></td>
+            <td th:text="${thesis.submitDate}"></td>
+            <td th:text="${thesis.statusFromSupervisor}"></td>
+            <td th:text="${thesis.status}"></td>
+            <td th:text="${thesis.acceptedDate}"></td>
+            <td th:text="${thesis.student}"></td>
+            <td th:text="${thesis.personel}"></td>
             <td>
-                <form th:action="@{/student/remove/{matriculaNo}(matriculaNo=${student.matriculaNo})}" th:method="post">
-                    <input type="submit" value="Delete"/>
+                <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:method="post">
+                     <input type="submit" value="Delete"/>
                 </form>
             </td>
         </tr>
     </table>
+    
 </div>
         
 

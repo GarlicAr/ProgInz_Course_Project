@@ -2,19 +2,25 @@ package lv.venta.controllers;
 
 import lv.venta.models.users.Student;
 import lv.venta.services.users.IStudentCRUDService;
+import lv.venta.services.users.impl.UserCRUDService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
-
+import java.util.List;
+import lv.venta.models.users.User;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/student")
 public class StudentController {
 
+	@Autowired
+	UserCRUDService userService;
+	
     @Autowired
     private IStudentCRUDService studentService;
 
@@ -38,25 +44,35 @@ public class StudentController {
     }
 
     @GetMapping("/remove/{matriculaNo}")
-    public String removeStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, Model model) {
+    public String removeStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo) {
         try {
             studentService.deleteStudentByMatriculaNo(matriculaNo);
-            model.addAttribute("myAllStudents", studentService.selectAllStudents());
-            return "student-all-page";
+            return "redirect:/student/showAll";
         } catch (Exception e) {
             return "error-page";
         }
     }
 
+
+
     @GetMapping("/insertNew")
-    public String insertNewStudent(Student student) {
+    public String insertNewStudent(Model model) {
+        List<User> users = userService.allUsers(); // Fetch all users
+        model.addAttribute("users", users);
+        model.addAttribute("student", new Student());
         return "student-add-page";
     }
 
-    @PostMapping("/inserNew")
-    public String insertNewStudent(@Valid Student student, BindingResult result) {
+    @PostMapping("/insertNew")
+    public String insertNewStudentPost(@Valid @ModelAttribute("student") Student student,@ModelAttribute("user") User user, BindingResult result) {
         if (!result.hasErrors()) {
-            studentService.insertNewStudent(student);
+        	Student stud = new Student(
+        			user.getPerson().getPersonName(),
+        			user.getPerson().getSurname(),
+        			user.getPerson().getPersonalCode(),
+        			user,
+        			student.getMatriculaNo());
+            studentService.insertNewStudent(stud);
             return "redirect:/student/showAll";
         } else {
             return "error-page";
@@ -64,9 +80,10 @@ public class StudentController {
     }
 
     @GetMapping("/update/{matriculaNo}")
-    public String updateStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, Model model) {
+    public String showUpdateForm(@PathVariable("matriculaNo") String matriculaNo, Model model) {
         try {
-            model.addAttribute("student", studentService.updateStudentByMatriculaNo(matriculaNo));
+            Student student = studentService.selectStudentByMatriculaNo(matriculaNo);
+            model.addAttribute("student", student);
             return "student-update-page";
         } catch (Exception e) {
             return "error-page";
@@ -75,15 +92,15 @@ public class StudentController {
 
     @PostMapping("/update/{matriculaNo}")
     public String updateStudentByMatriculaNo(@PathVariable("matriculaNo") String matriculaNo, @Valid Student student, BindingResult result) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
+            return "student-update-page";
+        } else {
             try {
-                Student temp = studentService.updateStudentByMatriculaNo(matriculaNo);
-                return "redirect:/student/show/" + temp.getMatriculaNo();
+                studentService.updateStudentByMatriculaNo(matriculaNo, student);
+                return "redirect:/student/show/" + student.getMatriculaNo();
             } catch (Exception e) {
                 return "redirect:/error-page";
             }
-        } else {
-            return "update-page";
         }
     }
 }

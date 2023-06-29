@@ -1,8 +1,10 @@
 package lv.venta.services.users;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lv.venta.models.users.Student;
+import lv.venta.models.users.User;
 
 public interface IStudentCRUDService {
 
@@ -12,7 +14,9 @@ public interface IStudentCRUDService {
 	
 	void deleteStudentByMatriculaNo(String matriculaNo) throws Exception;
 	
-	void insertNewStudent(Student student);
+	public void insertNewStudent(Student student);
 	
-	Student updateStudentByMatriculaNo(String matriculaNo) throws Exception;
+	void updateStudentByMatriculaNo(String matriculaNo, Student student) throws Exception;
+
+	List<User> getAllUsers();
 }

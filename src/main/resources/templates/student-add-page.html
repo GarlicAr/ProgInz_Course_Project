@@ -38,29 +38,27 @@
             padding: 20px;
         }
 
-        table {
+        input[type="text"], input[type="number"] {
             width: 100%;
-            border-collapse: collapse;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #4CAF50;
-        }
-
-        th {
+        button[type="submit"] {
             background-color: #4CAF50;
-            color: #fff;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
         }
 
-        tr:nth-child(even) {
-            background-color: #333;
-        }
-
-        tr:hover {
-            background-color: #4CAF50;
-            color: #fff;
+        button[type="submit"]:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -75,38 +73,26 @@
         <a href="/student/showAll">Students</a>
     </div>
 
-   <!-- Main content -->
+    <!-- Main content -->
     <div class="content">
-        
-<div class="container" th:if="${ not#lists.isEmpty(comments)}">
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Komentārs</th>
-            <th>Datums</th>
-            <th>Personāla ID</th>
-            <th>Thesis ID</th>
-        </tr>
-        <tr th:each="comments : ${comments}">
-            <td th:text="${comments.comment_id}"></td>
-            <td th:text="${comments.text}"></td>
-            <td th:text="${comments.date}"></td>
-            <td th:text="${comments.personel.personId}"></td>
-            <td th:text="${comments.thesis.thesis_id}"></td>
-        </tr>
-    </table>
-    
-</div>
-        
+        <div class="container">
+            <form th:action="@{/student/insertNew}" th:object="${student}" method="post">
 
+				<div>
+				    <label for="user">User:</label>
+				    <select id="user" name="user.id" th:field="*{user}" required>
+				        <option th:each="user : ${users}" th:value="${user.user_id}" th:text="${user.email}"></option>
+				    </select>
+				</div>
+				<div>
+	                <label for="matriculaNo">Matrikulas numurs</label>
+	                <input type="text" id="matriculaNo" th:field="*{matriculaNo}" name="matriculaNo" required>
+				</div>
 
+                <button type="submit">Pievienot jaunu Studentu</button>
+            </form>
+        </div>
     </div>
 
-
-    
-    <script>
-
-    </script>
-    
 </body>
 </html>

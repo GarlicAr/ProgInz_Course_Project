@@ -75,38 +75,44 @@
         <a href="/student/showAll">Students</a>
     </div>
 
-   <!-- Main content -->
+    <!-- Main content -->
     <div class="content">
         
-<div class="container" th:if="${ not#lists.isEmpty(comments)}">
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Komentārs</th>
-            <th>Datums</th>
-            <th>Personāla ID</th>
-            <th>Thesis ID</th>
-        </tr>
-        <tr th:each="comments : ${comments}">
-            <td th:text="${comments.comment_id}"></td>
-            <td th:text="${comments.text}"></td>
-            <td th:text="${comments.date}"></td>
-            <td th:text="${comments.personel.personId}"></td>
-            <td th:text="${comments.thesis.thesis_id}"></td>
-        </tr>
-    </table>
-    
-</div>
-        
-
-
+        <div class="container">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nosaukums latviski</th>
+                    <th>Nosaukums angliski</th>
+                    <th>Mērķis</th>
+                    <th>Uzdevums</th>
+                    <th>Iesniegsanas datums</th>
+                    <th>Supervisor statuss</th>
+                    <th>Statuss</th>
+                    <th>Apstirpināšanas datums</th>
+                    <th>Studenta ID</th>
+                    <th>Personāža ID</th>
+                    <th>Komentāri</th>
+                </tr>
+                <tr>
+                    <td th:text="${MyThesisById.thesis_id}"></td>
+                    <td th:text="${MyThesisById.titleLv}"></td>
+                    <td th:text="${MyThesisById.titleEn}"></td>
+                    <td th:text="${MyThesisById.aim}"></td>
+                    <td th:text="${MyThesisById.tasks}"></td>
+                    <td th:text="${MyThesisById.submitDate}"></td>
+                    <td th:text="${MyThesisById.statusFromSupervisor}"></td>
+                    <td th:text="${MyThesisById.status}"></td>
+                    <td th:text="${MyThesisById.acceptedDate}"></td>
+                    <td th:text="${MyThesisById.student}"></td> <!-- assuming student and personel are objects -->
+                    <td th:text="${MyThesisById.personel}"></td> <!-- and have id field -->
+                    <td th:text="${MyThesisById.comments}"></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-
-    
     <script>
-
     </script>
-    
 </body>
 </html>

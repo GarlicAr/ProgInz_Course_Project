@@ -59,11 +59,8 @@ public class ThesisCRUDService implements IThesisCRUDService {
         thesis.setTitleEn(inputThesis.getTitleEn());
         thesis.setAim(inputThesis.getAim());
         thesis.setTasks(inputThesis.getTasks());
-        // assuming status from supervisor can be updated
         thesis.setStatusFromSupervisor(inputThesis.isStatusFromSupervisor());
-        // assuming reviewers can be updated
         thesis.setReviewers(inputThesis.getReviewers());
-        // assuming comments can be updated
         thesis.setComments(inputThesis.getComments());
 
         thesisRepo.save(thesis);

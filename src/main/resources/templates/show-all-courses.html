@@ -90,45 +90,28 @@
    <!-- Main content -->
     <div class="content">
         
-<div class="container" th:if="${ not#lists.isEmpty(personel)}">
+<div class="container" th:if="${ not#lists.isEmpty(courses)}">
     <table>
         <tr>
             <th>ID</th>
-            <th>Vārds</th>
-            <th>Uzvārds</th>
-            <th>Grāds</th>
-            <th>Kursa Darba ID</th>
-            <th>Komentāra ID</th>
+            <th>Nosaukums</th>
+            <th>Kreditpunkti</th>
             <th>Darbibas</th>
         </tr>
-        <tr th:each="personel : ${personel}">
-            <td th:text="${personel.personId}"></td>
-            <td th:text="${personel.personName}"></td>
-            <td th:text="${personel.surname}"></td>
-            <td th:text="${personel.degree}"></td>
-            <td>
-                <span th:each="thesis, iterStat : ${personel.thesis}">
-                    <span th:text="${thesis.thesis_id}"></span>
-                    <span th:if="${!iterStat.last}">, </span>
-                </span>
-                 
-            </td>
-            <td>
-                 <span th:each="comment, iterStat : ${personel.comments}">
-                    <span th:text="${comment.comment_id}"></span>
-                    <span th:if="${!iterStat.last}">, </span>
-                </span>
-            </td>
+        <tr th:each="courses : ${courses}">
+            <td th:text="${courses.courseId}"></td>
+            <td th:text="${courses.title}"></td>
+            <td th:text="${courses.creditPoints}"></td>
 
             <td>
-                <a th:href="@{/personel/showOne/{id}(id=${personel.personId})}">Apskatities</a>
+                <a th:href="@{/courses/showOne/{id}(id=${courses.courseId})}">Apskatities</a>
             </td>
         </tr>
         
     </table>
 
 
-    <a class="btn" th:href="@{/personel/add}">Pievienot Jaunu</a>
+    <a class="btn" th:href="@{/courses/add}">Pievienot Jaunu</a>
 
     
 

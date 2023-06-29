@@ -107,62 +107,40 @@
    <!-- Main content -->
     <div class="content">
         <div class="container">
-            <h2>Vadības informācija</h2>
+            <h2>Kursa Informacija</h2>
             <div>
                 <label>ID:</label>
-                <span th:text="${personel.personId}"></span>
+                <span th:text="${courses.courseId}"></span>
             </div>
             <div>
-                <label>Vārds:</label>
-                <span th:text="${personel.personName}"></span>
+                <label>Nosaukums:</label>
+                <span th:text="${courses.title}"></span>
             </div>
             <div>
-                <label>Uzvārds:</label>
-                <span th:text="${personel.surname}"></span>
-            </div>
-            <div>
-                <label>Grāds:</label>
-                <span th:text="${personel.degree}"></span>
+                <label>Kreditpunkti:</label>
+                <span th:text="${courses.creditPoints}"></span>
             </div>
 
-            <div class="comments-container" th:if="${not #lists.isEmpty(personel.comments)}">
-                <h2>Komentāri</h2>
+            <div class="message" th:if="${#lists.isEmpty(courses.studentsWithDebt)}">
+                Šajā kursā nav parādnieku!
+            </div>
+
+            <div class="debt-container" th:if="${not #lists.isEmpty(courses.studentsWithDebt)}">
+                <h2>Student ar paradiem</h2>
                 <table>
                     <tr>
-                        <th>Komentāra ID</th>
-                        <th>Komentārs</th>
+                        <th>Studenta ID</th>
+                        <th>Studenta Vards</th>
                     </tr>
-                    <tr th:each="comment : ${personel.comments}">
-                        <td th:text="${comment.comment_id}"></td>
-                        <td th:text="${comment.text}"></td>
-                    </tr>
-                </table>
-                
-            </div>
-
-            <div class="message" th:if="${#lists.isEmpty(personel.comments)}">
-                Nav pieejami komentari!
-            </div>
-
-
-            <div class="thesis-container" th:if="${not #lists.isEmpty(personel.thesis)}">
-                <h2>Gala Darbi</h2>
-                <table>
-                    <tr>
-                        <th>Gala darba ID</th>
-                    </tr>
-                    <tr th:each="thesis : ${personel.thesis}">
-                        <td th:text="${thesis.thesis_id}"></td>
+                    <tr th:each="student : ${courses.studentsWithDebt}">
+                        <td th:text="${student.personId}"></td>
+                        <td th:text="${student.personName}"></td>
                     </tr>
                 </table>
-                
+              
             </div>
 
-            <div class="message" th:if="${#lists.isEmpty(personel.thesis)}">
-                Nav pieejami darbi!
-            </div>
-
-            <form th:action="@{/personel/delete/{id}(id=${personel.personId})}" method="GET">
+            <form th:action="@{/courses/delete/{id}(id=${courses.courseId})}" method="GET">
                 <button type="submit" class="delete-button">Delete</button>
             </form>
             

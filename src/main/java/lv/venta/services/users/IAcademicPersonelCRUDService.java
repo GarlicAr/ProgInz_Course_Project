@@ -24,4 +24,6 @@ public interface IAcademicPersonelCRUDService {
 	
 	void deletePersonelById(long id) throws Exception;
 
+	void updatePersonelById(int id, Academic_personel personel);
+
 }

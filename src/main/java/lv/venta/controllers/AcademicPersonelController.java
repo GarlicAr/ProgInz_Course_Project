@@ -125,7 +125,40 @@ public class AcademicPersonelController {
 	}
 	
 	
+	@GetMapping("/personel/update/{id}")
+    public String updatePersonelById(@PathVariable("id") int id, org.springframework.ui.Model model) {
+        
+
+		try {
+			Academic_personel temp = personelService.findById(id);
+			Degree[] degrees = Degree.values();
+			
+			model.addAttribute("degrees", degrees);
+			model.addAttribute("personel", temp);
+			return "update-personel";
+		}catch (Exception e) {
+			
+			return "error-page";
+			
+		}
+        
+    }
 	
+	
+	@PostMapping("/personel/update/{id}")
+	public String updateDriverById2(@PathVariable int id, @Valid Academic_personel personel, BindingResult bindingResult) {
+	    if (bindingResult.hasErrors()) {
+	        return "update-driver";
+	    }
+
+	    if (id > 0) {
+	    	
+	        personelService.updatePersonelById(id, personel);
+	        return "redirect:/personel/showAll";
+	    }
+
+	    return "error-page";
+	}
 	
 	
 	

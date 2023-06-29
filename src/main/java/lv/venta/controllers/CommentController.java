@@ -22,30 +22,20 @@ import lv.venta.services.users.impl.AcademicPersonelCRUDService;
 @RequestMapping("/comments")
 public class CommentController {
 
-//	@Autowired
-//	private AcademicPersonelCRUDService academicPersonelService;
-//	
-//	@Autowired
-//	private ThesisCRUDService thesisService;
+
 	
 	@Autowired
 	private CommentsCRUDService commentsService;
 	
-	@GetMapping("/comments")
-	private String commentsScreen(Model model) {
-		
-		return "index";
-		
-	}
-	
-	@GetMapping("/Comments/showAll")
+
+	@GetMapping("/showAll")
     public String showAllComments(Model model) {
-    	ArrayList<Comments> tempArray = commentsService.selectAllComments();
+    	ArrayList<Comments> tempArray = (ArrayList<Comments>) commentsService.getAll();
         model.addAttribute("comments", tempArray);
         return "comment";
     }
 
-	@GetMapping("/comments/showOne/{id}")
+	@GetMapping("/showOne/{id}")
 	private String showOnePersonel(@PathVariable("id") int id, Model model) {
 		
 		try {
@@ -65,7 +55,7 @@ public class CommentController {
 		
 	}
 	
-	@GetMapping("/comments/add")
+	@GetMapping("/add")
 	public String postComment(Model model) {
 		
 //	    Comments tempComments = new Comments();
@@ -85,7 +75,7 @@ public class CommentController {
 	    return "insert-new-comments";
 	}
 	
-	@PostMapping("/comments/add")
+	@PostMapping("/add")
 	private String createCommentsPost(@Valid Comments comments, BindingResult bindingResult) {
 		
 		if (bindingResult.hasErrors()) {

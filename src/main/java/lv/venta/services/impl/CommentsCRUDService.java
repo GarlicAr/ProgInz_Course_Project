@@ -23,29 +23,16 @@ public class CommentsCRUDService implements ICommentsCRUDService{
 		return (List<Comments>) commentsRepo.findAll();
 	}
 
-	private ArrayList<Comments> commentsList;
 	
-	public CommentsCRUDService() {
-        commentsList = new ArrayList<>();
-    }
-	
-	@Override
-	public ArrayList<Comments> selectAllComments() {
-		// TODO Auto-generated method stub
-		//commentsList = new ArrayList<>();
-		
-//		commentsList.add(new Comments("Ir komentārs", Personel, Thesis));
-//		commentsList.add(new Comments("Nav komentārs", null, null));
-		return commentsList;
-	}
+
 	
 	@Override
 	public Comments findById(long id) {
 		try {
 			
-			for (Comments comments : commentsList) {
+			for (Comments comments : getAll()) {
 				if (comments.getComment_id() == id) {
-					commentsList.add(comments);
+
 					return comments;
 				}
 			}
@@ -58,19 +45,28 @@ public class CommentsCRUDService implements ICommentsCRUDService{
 
 	@Override
 	public void insertNewComments(Comments comments) {
-		commentsList.add(comments);
+		//commentsList.add(comments);
 		return;
 	}
 
 	@Override
     public void deleteCommentsById(long id) throws Exception {
-        for (Comments comments : commentsList) {
+        for (Comments comments : getAll()) {
             if (comments.getComment_id() == id) {
-                commentsList.remove(comments);
+                //commentsList.remove(comments);
                 return;
             }
         }
         throw new Exception("Comments with id " + id + " not found.");
     }
+
+
+
+
+	@Override
+	public ArrayList<Comments> selectAllComments() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

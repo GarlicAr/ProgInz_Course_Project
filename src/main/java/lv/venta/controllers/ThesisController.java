@@ -62,7 +62,6 @@ public class ThesisController {
                 return "error-page";
             }
         } else {
-            // Print the binding result errors for debugging purposes
             System.out.println(result.getAllErrors());
             return "error-page";
         }
@@ -76,21 +75,19 @@ public class ThesisController {
             model.addAttribute("thesis", thesis);
             return "update-thesis";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
             return "error-page";
         }
     }
 
     @PostMapping("/update/{thesis_id}")
-    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, @Valid Thesis thesis, BindingResult result, Model model) {
+    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, @Valid Thesis thesis, BindingResult result) {
         if (result.hasErrors()) {
             return "thesis-update-page";
         } else {
             try {
                 thesisService.updateThesis(thesis);
-                return "redirect:/thesis/showAll"; // redirect to showAll page after update
+                return "redirect:/thesis/showAll"; 
             } catch (Exception e) {
-                model.addAttribute("errorMessage", e.getMessage());
                 return "error-page";
             }
         }

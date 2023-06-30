@@ -126,8 +126,10 @@
                 <label>Personel ID:</label>
                 <span th:each="comment : ${comments.personel}" th:text="${personel.personel_id}"></span>
             </div> -->
-
-            <div class="comments-container" th:if="${not #lists.isEmpty(personel.comments)}">
+		     
+		     
+		      
+            <div class="comments-container" th:if="${not #lists.isEmpty(comments.personel)}">
                 <h2>Personel</h2>
                 <table>
                     <tr>
@@ -135,8 +137,13 @@
                         <th>Personel</th>
                     </tr>
                     <tr th:each="personel : ${comments.personel}">
-                        <td th:text="${personel.personel_id}"></td>
+                      	<td th:text="${personel.personId}"></td>
                         <td th:text="${personel.text}"></td>
+                        
+                        <td>
+                  			<span th:if="${showOneCommentsById.comments != null}" th:text="${showOneCommentsById.comments.personId}"></span>
+             			</td>
+                        
                     </tr>
                 </table>
                 <div class="message" th:if="${#lists.isEmpty(comments.personel)}">
@@ -145,16 +152,16 @@
             </div>
 
 
-            <div class="thesis-container" th:if="${not #lists.isEmpty(personel.thesis)}">
+            <div class="thesis-container" th:if="${not #lists.isEmpty(comments.thesis)}">
                 <h2>Thesis</h2>
                 <table>
                     <tr>
                         <th>Thesis ID</th>
                         <th>Thesis</th>
                     </tr>
-                    <tr th:each="thesis : ${comments.thesis}">
+                    <!--<tr th:each="thesis : ${comments.thesis}">
                         <td th:text="${thesis.thesis_id}"></td>
-                        <td th:text="${thesis.text}"></td>
+                        <td th:text="${thesis.text}"></td>-->
                     </tr>
                 </table>
                 <div class="message" th:if="${#lists.isEmpty(comments.thesis)}">
@@ -162,7 +169,7 @@
                 </div>
             </div>
 
-            <form th:action="@{/comments/delete/{__id__}(id=${comments.comment_id})}" method="POST">
+            <form th:action="@{/comments/delete/{id}(id=${comments.comment_id})}" method="POST">
                 <input type="hidden" name="_method" value="DELETE" />
                 <button type="submit" class="delete-button">Delete</button>
             </form>

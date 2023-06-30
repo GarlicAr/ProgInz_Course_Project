@@ -100,6 +100,7 @@
             <th>Date</th>
             <th>Personel ID</th>
             <th>Thesis ID</th>
+            <th>Darbibas</th>
         </tr>
         <tr th:each="comments : ${comments}">
             <td th:text="${comments.comment_id}"></td>
@@ -108,15 +109,24 @@
             <!--<td th:text="${comments.personel}"></td>-->
             <!--<td th:text="${comments.thesis}"></td>-->
             <td>
-                <span th:each="thesis : ${comments.thesis}" th:text="${thesis.thesis_id}"></span>
+                <!--<span th:each="thesis : ${comments.thesis}" th:text="${thesis.thesis_id}"></span>-->
+                <span th:each="thesis, iterStat : ${comments.thesis}">
+                    <span th:text="${thesis.thesis_id}"></span>
+                    <span th:if="${!iterStat.last}">, </span>
+                </span>
             </td>
             <td>
-                <span th:each="comment : ${comments.personel}" th:text="${personel.personel_id}"></span>
+                <span th:each="personel, iterStat : ${comments.personel}">
+                    <span th:text="${personel.personId}"></span>
+                    <span th:if="${!iterStat.last}">, </span>
+                </span>
             </td>
-
+            
             <td>
-                <a th:href="@{/comments/showOne/{id}(id=${comments.comment_id})}">Apskatities</a>
+                <!--<a th:href="@{/comments/showOne/{id}(id=${comments.comment_id})}">Apskatities</a>-->
+                <a th:href="@{/comments/update/{id}(id=${comments.comment_id})}">Atjaunot</a>
             </td>
+            
         </tr>
         
     </table>

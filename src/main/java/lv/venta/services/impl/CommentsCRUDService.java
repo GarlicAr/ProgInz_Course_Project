@@ -2,15 +2,6 @@ package lv.venta.services.impl;
 
 
 import java.util.ArrayList;
-
-
-import org.springframework.stereotype.Service;
-
-import lv.venta.models.Comments;
-import lv.venta.models.users.Person;
-import lv.venta.services.ICommentsCRUDService;
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +11,6 @@ import lv.venta.models.Comments;
 import lv.venta.models.users.Person;
 import lv.venta.repos.IRepoComments;
 import lv.venta.services.ICommentsCRUDService;
-
 
 @Service
 public class CommentsCRUDService implements ICommentsCRUDService{
@@ -79,4 +69,24 @@ public class CommentsCRUDService implements ICommentsCRUDService{
 		return null;
 	}
 
+
+	@Override
+	public void updateCommentsById(int id, Comments comments) {
+		for (Comments comm : getAll()) {
+	        if (comm.getComment_id() == id) {
+	        	
+	     	    if (comm != null) {
+	     	    	comm.setText(comments.getText());
+	     	    	comm.setDate(comments.getDate());
+	     	    	comm.setPersonel(comments.getPersonel());
+	     	    	comm.setThesis(comments.getThesis());
+
+	     	        commentsRepo.save(comm);
+	     	    }
+	        }
+	    }
+		
+	}
+	
+	
 }

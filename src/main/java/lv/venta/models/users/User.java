@@ -24,12 +24,12 @@ public class User {
 	
 	
 	@Column(name = "password")
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Jābūt vismaz 8 simbolus garai.\r\n"
-			+ "Jāsatur vismaz viena maza burta rakstzīme.\r\n"
-			+ "Jāsatur vismaz viena liela burta rakstzīme.\r\n"
-			+ "Jāsatur vismaz viena cipara rakstzīme.\r\n"
-			+ "Jāsatur vismaz viena īpaša rakstzīme (@, $, !, %, *, ?, &).")
-	@NotNull
+//	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Jābūt vismaz 8 simbolus garai.\r\n"
+//			+ "Jāsatur vismaz viena maza burta rakstzīme.\r\n"
+//			+ "Jāsatur vismaz viena liela burta rakstzīme.\r\n"
+//			+ "Jāsatur vismaz viena cipara rakstzīme.\r\n"
+//			+ "Jāsatur vismaz viena īpaša rakstzīme (@, $, !, %, *, ?, &).")
+//	@NotNull
 	private String password;
 	
 	@Column(name = "email")
@@ -50,11 +50,9 @@ public class User {
 
 	
 	public void setPassword(String password) {
-		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
-		this.password = passwordEncoder.encode(password);
-		
+	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	    String encodedPassword = passwordEncoder.encode(password);
+	    this.password = encodedPassword;
 	}
 
 

@@ -123,18 +123,28 @@
     <div class="content">
         
         <div class="container">
-            <form action="/comments/add" method="POST" th:object="${comments}">
+            <form action="/add" method="POST" th:object="${comments}">
                 <div>
-                    <label for="name">Comment:</label>
+                    <label for="Comment">Comment:</label>
                     <input type="text" id="comment" name="text" th:field="*{text}" required>
                     <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
                 </div>
                 <div>
-                    <label for="surname">Date:</label>
-                    <input type="datetime-local" id="date" name="date" th:field="*{date}" required>
+                    <label for="Date">Date:</label>
+                    <input type="date" id="date" name="date" th:field="*{date}" required>
                     <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
                 </div>
-               
+                <div>
+                  <!--  <label for="name">Personel ID:</label>
+                    <input type="text" id="personel_id" name="personel_id" th:field="*{personel_id}" required>
+                    <option th:each="personel : ${personel}" th:value="${comments.personId}"></option>
+                </div>
+                <div>
+                    <label for="name">Thesis ID:</label>
+                    <input type="text" id="thesis_id" name="thesis_id" th:field="*{thesis_id}" required>
+                    <span th:if="${#fields.hasErrors('thesis_id')}" th:errors="*{thesis_id}"></span>
+                </div>-->
+                
                 <button type="submit" class="btn">Create</button>
             </form>
         </div>

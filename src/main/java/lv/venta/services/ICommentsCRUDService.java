@@ -33,4 +33,7 @@ public interface ICommentsCRUDService {
 	
 	void deleteCommentsById(long id) throws Exception;
 	
+	void updateCommentsById(int id, Comments comments);
+	
+	
 }

@@ -71,7 +71,6 @@ public class Thesis {
 		
 	//TODO pieviento validacijas
 	@Column(name = "tasks")
-	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
 	private String tasks;
 	
 	//TODO pie jauna objekta izveides jauzliek LocalDateTime.now()

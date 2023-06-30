@@ -70,6 +70,7 @@ public class CourseCRUDService implements ICourseCRUDService {
 
 	}
 
+	
 	@Override
 	public void insertNewCourse(Course course) {
 

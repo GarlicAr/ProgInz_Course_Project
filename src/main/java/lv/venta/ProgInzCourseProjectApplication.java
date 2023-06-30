@@ -48,10 +48,10 @@ public class ProgInzCourseProjectApplication {
 				// TODO Auto-generated method stub
 				
 				//Users
-				User user1 = new User("test0@test.com");
-				User user2 = new User("test1@test.com");
-				User user3 = new User("test2@test.com");
-				User user4 = new User("test3@test.com");
+				User user1 = new User("test0@test.com", "Abcd!s342");
+				User user2 = new User("test1@test.com", "Abcd!s342");
+				User user3 = new User("test2@test.com", "Abcd!s342");
+				User user4 = new User("test3@test.com", "Abcd!s342");
 				userRep.save(user1);
 				userRep.save(user2);
 				userRep.save(user3);
@@ -84,8 +84,8 @@ public class ProgInzCourseProjectApplication {
 				
 				
 				//Thesis
-				Thesis th1 = new Thesis("Sistemas izstrade", "System development", "Development", "1. 2. 3.", student1, ac1);
-				Thesis th2 = new Thesis("Kripto", "Crypto", "Blockchain", "1. 2. 3.", student2, ac2);
+				Thesis th1 = new Thesis("Sistemas izstrade", "System development", "Development", "Abc", student1, ac1);
+				Thesis th2 = new Thesis("Kripto", "Crypto", "Blockchain", "Abc", student2, ac2);
 				th1.addReviewer(ac2);
 				th2.addReviewer(ac1);
 				thesisRep.save(th1);

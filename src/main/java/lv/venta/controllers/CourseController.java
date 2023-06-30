@@ -16,6 +16,7 @@ import lv.venta.models.Course;
 import lv.venta.models.users.Academic_personel;
 import lv.venta.models.users.Student;
 import lv.venta.services.impl.CourseCRUDService;
+import lv.venta.services.users.impl.StudentCRUDService;
 
 @Controller
 @RequestMapping("/courses")
@@ -23,6 +24,9 @@ public class CourseController {
 	
 	@Autowired
 	CourseCRUDService courseService;
+	
+	@Autowired
+	StudentCRUDService studentService;
 	
 	@GetMapping("/showAll")
 	public String showAllCourses(Model model) {
@@ -44,9 +48,13 @@ public class CourseController {
 		
 		Course course = courseService.findCourseById(id);
 		
+		List<Student> students = studentService.selectAllStudents();
+		
 		List<Student> debt = courseService.getDebtStudents(null);
 		
 		model.addAttribute("courses", course);
+		
+		model.addAttribute("students", students);
 		
 		return "show-one-courses";
 		
@@ -85,5 +93,26 @@ public class CourseController {
 	
 	
 	//TODO pievienot Parādniekus!
+	
+	@PostMapping("/addDebt/{courseId}/{studentId}")
+	public String addDebt(@PathVariable long courseId,@PathVariable long studentId) {
+		
+		try {
+			
+			
+			courseService.addDebtById(courseId, studentId);
+			
+			return "redirect:/courses/showAll";
+			
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return "error-page";
+	}
+	
+	
 
 }

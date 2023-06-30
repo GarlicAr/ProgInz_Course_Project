@@ -19,5 +19,7 @@ public interface ICourseCRUDService {
 	
 	public Course findCourseById(long id);
 	
+	public void addDebtById(long courseId, long studentId) throws Exception;
+	
 	
 }

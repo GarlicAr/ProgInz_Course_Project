@@ -99,16 +99,16 @@ public class HomeController {
 
 	    try {
 	        if (userService.findByEmail(person.getUser().getEmail()) == null) {
-	        	
-	        	User user = new User();
+	            User user = new User();
 	            user.setPassword(person.getUser().getPassword());
 	            user.setEmail(person.getUser().getEmail());
-	        	
+
+
 	            userService.registerUser(user);
-	            
-	            
+
+
 	            person.setUser(user);
-	            personService.reigsterPerson(person); 
+	            personService.reigsterPerson(person);
 
 	            model.addAttribute("person", person);
 
@@ -123,6 +123,7 @@ public class HomeController {
 
 	    return "error-page";
 	}
+
 
 
 

@@ -1,17 +1,32 @@
 package lv.venta.services.impl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lv.venta.models.Comments;
 import lv.venta.models.Thesis;
+import lv.venta.models.users.Academic_personel;
+import lv.venta.repos.IRepoComments;
 import lv.venta.repos.IRepoThesis;
 import lv.venta.services.IThesisCRUDService;
+import lv.venta.services.users.impl.AcademicPersonelCRUDService;
 
 @Service
 public class ThesisCRUDService implements IThesisCRUDService {
 
     @Autowired
     private IRepoThesis thesisRepo;
+    
+	@Autowired
+	CommentsCRUDService commentsService;
+	
+	@Autowired
+	IRepoComments commentsRepo;
+	
+
 
     @Override
     public ArrayList<Thesis> selectAllThesis() {
@@ -48,6 +63,8 @@ public class ThesisCRUDService implements IThesisCRUDService {
     public void deleteThesis(long thesis_id) {
         thesisRepo.deleteById(thesis_id);
     }
+    
+
 
 
     @Override
@@ -59,11 +76,8 @@ public class ThesisCRUDService implements IThesisCRUDService {
         thesis.setTitleEn(inputThesis.getTitleEn());
         thesis.setAim(inputThesis.getAim());
         thesis.setTasks(inputThesis.getTasks());
-        // assuming status from supervisor can be updated
         thesis.setStatusFromSupervisor(inputThesis.isStatusFromSupervisor());
-        // assuming reviewers can be updated
         thesis.setReviewers(inputThesis.getReviewers());
-        // assuming comments can be updated
         thesis.setComments(inputThesis.getComments());
 
         thesisRepo.save(thesis);

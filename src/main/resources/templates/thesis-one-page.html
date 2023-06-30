@@ -114,6 +114,14 @@
 		                    <span th:if="${!iterStat.last}">, </span>
 		                </span>
 		            </td>
+					<td>
+					    <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${MyThesisById.thesis_id})}" th:method="post">
+					        <input type="submit" value="Izdzēst"/>
+					    </form>
+					    <form th:action="@{/thesis/update/{thesis_id}(thesis_id=${MyThesisById.thesis_id})}" th:method="get">
+					        <input type="submit" value="Atjaunot"/>
+					    </form>
+					</td>
                 </tr>
             </table>
         </div>

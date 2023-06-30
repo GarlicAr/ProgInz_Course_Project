@@ -91,9 +91,7 @@ public class CourseController {
 	
 	//TODO update
 	
-	
-	//TODO pievienot Parādniekus!
-	
+		
 	@PostMapping("/addDebt/{courseId}/{studentId}")
 	public String addDebt(@PathVariable long courseId,@PathVariable long studentId) {
 		
@@ -102,7 +100,7 @@ public class CourseController {
 			
 			courseService.addDebtById(courseId, studentId);
 			
-			return "redirect:/courses/showAll";
+			return "redirect:/courses/showOne/{courseId}";
 			
 			
 		} catch (Exception e) {
@@ -112,6 +110,18 @@ public class CourseController {
 		
 		return "error-page";
 	}
+	
+	@PostMapping("/removeDebt/{courseId}/{studentId}")
+	public String removeDebt(@PathVariable long courseId, @PathVariable long studentId) {
+	    try {
+	        courseService.removeDebtFromCourse(courseId, studentId);
+	        return "redirect:/courses/showOne/{courseId}";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return "error-page";
+	}
+
 	
 	
 

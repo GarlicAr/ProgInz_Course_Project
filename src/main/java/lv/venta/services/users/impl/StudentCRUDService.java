@@ -91,6 +91,19 @@ public class StudentCRUDService implements IStudentCRUDService{
 	        throw new Exception("Nepareizs matrikulasNo");
 	    }
 	}
+	@Override
+	public Student findById(long id) {
+		
+		
+		for(Student student: selectAllStudents()) {
+			if(student.getPersonId() == id) {
+				return student;
+			}
+		}
+		
+		return null;
+		
+	}
 	
 	
 	

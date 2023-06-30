@@ -21,4 +21,6 @@ public interface IStudentCRUDService {
 
 	List<User> getAllUsers();
 	
+	public Student findById(long id);
+	
 }

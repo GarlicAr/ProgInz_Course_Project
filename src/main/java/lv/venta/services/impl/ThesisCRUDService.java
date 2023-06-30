@@ -68,18 +68,18 @@ public class ThesisCRUDService implements IThesisCRUDService {
 
 
     @Override
-    public void updateThesis(Thesis inputThesis) throws Exception {
-        Thesis thesis = thesisRepo.findById(inputThesis.getThesis_id())
-                .orElseThrow(() -> new Exception("No Thesis found with this ID"));
+    public void updateThesis(long id, Thesis inputThesis) throws Exception {
+        Thesis temp = new Thesis();
+        temp = selectThesisById(id);
 
-        thesis.setTitleLv(inputThesis.getTitleLv());
-        thesis.setTitleEn(inputThesis.getTitleEn());
-        thesis.setAim(inputThesis.getAim());
-        thesis.setTasks(inputThesis.getTasks());
-        thesis.setStatusFromSupervisor(inputThesis.isStatusFromSupervisor());
-        thesis.setStatus(inputThesis.getStatus());
-        //thesis.setComments(inputThesis.getComments());
+        temp.setTitleLv(inputThesis.getTitleLv());
+        temp.setTitleEn(inputThesis.getTitleEn());
+        temp.setAim(inputThesis.getAim());
+        temp.setTasks(inputThesis.getTasks());
+        temp.setStatusFromSupervisor(inputThesis.isStatusFromSupervisor());
+        temp.setStatus(inputThesis.getStatus());
+        //temp.setComments(inputThesis.getComments());
 
-        thesisRepo.save(thesis);
+        thesisRepo.save(temp);
     }
 }

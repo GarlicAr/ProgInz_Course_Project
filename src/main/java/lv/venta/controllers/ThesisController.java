@@ -85,7 +85,7 @@ public class ThesisController {
             return "update-thesis";
         } else {
             try {
-                thesisService.updateThesis(thesis);
+                thesisService.updateThesis(thesis_id, thesis);
                 return "redirect:/thesis/showAll"; 
             } catch (Exception e) {
                 return "error-page";

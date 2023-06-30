@@ -14,7 +14,7 @@ public interface IThesisCRUDService {
     
     void deleteThesis(long id) throws Exception;
     
-    void updateThesis(Thesis updatedThesis) throws Exception;
+    void updateThesis(long id, Thesis inputThesis) throws Exception;
     
     ArrayList<Thesis> selectAllThesis();
     

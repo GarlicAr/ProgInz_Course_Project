@@ -149,6 +149,7 @@
                         <th>Studenta ID</th>
                         <th>Studenta Vārds</th>
                         <th>Pievienot kā parādnieku</th>
+                        <th>Noņemt parādnieku!</th>
                     </tr>
                     <tr th:each="student : ${students}">
                         <td th:text="${student.personId}"></td>
@@ -156,6 +157,11 @@
                         <td>
                             <form th:action="@{/courses/addDebt/{courseId}/{studentId}(studentId=${student.personId}, courseId=${courses.courseId})}" method="POST">
                                 <button type="submit" class="add-debt-button">Pievienot kā parādnieku</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/courses/removeDebt/{courseId}/{studentId}(courseId=${courses.courseId}, studentId=${student.personId})}" method="POST">
+                                <button type="submit" class="remove-debt-button">Noņemt</button>
                             </form>
                         </td>
                     </tr>

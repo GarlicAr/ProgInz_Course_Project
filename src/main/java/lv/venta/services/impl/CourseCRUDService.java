@@ -198,6 +198,44 @@ public class CourseCRUDService implements ICourseCRUDService {
 		
 	}
 	
+	@Override
+	public void removeDebtFromCourse(long courseId, long studentId) throws Exception {
+	    try {
+	        Course course = findCourseById(courseId);
+	        if (course == null) {
+	            throw new Exception("Kurss netika atrasts!");
+	        }
+	        
+	        Student student = studentService.findById(studentId);
+	        if (student == null) {
+	            throw new Exception("Students netika atrasts!");
+	        }
+	        
+	        List<Student> debtStudents = (List<Student>) course.getStudentsWithDebt();
+	        List<Course> studentDebtCourses = (List<Course>) student.getDebtCourses();
+	        
+	        if (debtStudents.contains(student) && studentDebtCourses.contains(course)) {
+	            debtStudents.remove(student);
+	            studentDebtCourses.remove(course);
+	            
+	            course.setStudentsWithDebt(debtStudents);
+	            student.setDebtCourses(studentDebtCourses);
+	            
+	            if (studentDebtCourses.isEmpty()) {
+	                student.setDebt(false);
+	            }
+	            
+	            studentRepo.save(student);
+	            courseRepo.save(course);
+	        } else {
+	            throw new Exception("Studenta parāds nav reģistrēts!");
+	        }
+	    } catch (Exception e) {
+	        throw new Exception("Kaut kas nogāja greizi!");
+	    }
+	}
+
+	
 	
 	
 

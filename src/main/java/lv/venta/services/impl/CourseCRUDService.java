@@ -9,13 +9,21 @@ import org.springframework.stereotype.Service;
 import lv.venta.models.Course;
 import lv.venta.models.users.Student;
 import lv.venta.repos.IRepoCourse;
+import lv.venta.repos.users.IRepoStudent;
 import lv.venta.services.ICourseCRUDService;
+import lv.venta.services.users.IStudentCRUDService;
 
 @Service
 public class CourseCRUDService implements ICourseCRUDService {
 
 	@Autowired
 	IRepoCourse courseRepo;
+	
+	@Autowired
+	IRepoStudent studentRepo;
+	
+	@Autowired
+	IStudentCRUDService studentService;
 
 	@Override
 	public List<Course> getAll() {
@@ -70,6 +78,7 @@ public class CourseCRUDService implements ICourseCRUDService {
 
 	}
 
+	
 	@Override
 	public void insertNewCourse(Course course) {
 
@@ -131,5 +140,65 @@ public class CourseCRUDService implements ICourseCRUDService {
 		
 		return null;
 	}
+
+	@Override
+	public void addDebtById(long courseId, long studentId) throws Exception {
+	
+		
+		try {
+			if(findCourseById(courseId)==null) {
+				throw new Exception("Kurss netika atrasts!");
+				
+			}
+			
+			if(studentService.findById(studentId) == null) {
+				throw new Exception("Students netika atrasts!");
+			}
+			
+			//Jauni mainigie
+			
+			List<Student> debt = new ArrayList<>();
+			
+			Course temp = findCourseById(courseId);
+			
+			Student tempStud = studentService.findById(studentId);
+			
+			//Darbibas!
+			
+			debt = (List<Student>) temp.getStudentsWithDebt();
+			
+			List<Course> studentDebt = (List<Course>) tempStud.getDebtCourses();
+			
+			if(!debt.contains(tempStud) && !studentDebt.contains(temp)) {
+				
+				debt.add(tempStud);
+				
+				studentDebt.add(temp);
+				
+				temp.setStudentsWithDebt(debt);
+				
+				tempStud.setDebt(true);
+				
+				tempStud.setDebtCourses(studentDebt);
+				
+				studentRepo.save(tempStud);
+				
+				courseRepo.save(temp);
+				
+			}
+			else {
+				throw new Exception("Studenta parāds jau ir registrēts!");
+			}
+			
+			
+			
+		} catch (Exception e) {
+			throw new Exception("Kaut kas nogāja greizi !");
+		}
+		
+	}
+	
+	
+	
 
 }

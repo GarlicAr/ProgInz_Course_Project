@@ -203,6 +203,24 @@ public class AcademicPersonelCRUDService implements IAcademicPersonelCRUDService
 		
 		return null;
 	}
+	
+	
+	@Override
+	public void updatePersonelById(int id, Academic_personel personel) {
+	    for (Academic_personel pers : getAll()) {
+	        if (pers.getPersonId() == id) {
+	        	
+	     	    if (pers != null) {
+	     	    	pers.setPersonName(personel.getPersonName());
+	     	    	pers.setSurname(personel.getSurname());
+	     	    	pers.setDegree(personel.getDegree());
+	     	    	pers.setPersonalCode(personel.getPersonalCode());
+
+	     	        personelRepo.save(pers);
+	     	    }
+	        }
+	    }
+	}
 
 }
 

@@ -75,43 +75,35 @@
      <div class="content">
         <div class="container">
             <form th:action="@{/thesis/update/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:object="${thesis}" method="post">
-                <div>
-                    <label for="titleLv">Nosaukums latviski</label>
-                    <input type="text" id="titleLv" th:field="*{titleLv}" name="titleLv" required>
-                </div>
+                <label for="titleLv">Nosaukums latviski</label>
+                <input type="text" id="titleLv" th:field="*{titleLv}" name="titleLv" required>
 
-                <div>
-                    <label for="titleEn">Nosaukums angliski</label>
-                    <input type="text" id="titleEn" th:field="*{titleEn}" name="titleEn" required>
-                </div>
+                <label for="titleEn">Nosaukums angliski</label>
+                <input type="text" id="titleEn" th:field="*{titleEn}" name="titleEn" required>
 
-                <div>
-                    <label for="aim">Mērķis</label>
-                    <textarea id="aim" th:field="*{aim}" name="aim" required></textarea>
-                </div>
+                <label for="aim">Mērķis</label>
+                <textarea id="aim" th:field="*{aim}" name="aim" required></textarea>
 
-                <div>
-                    <label for="tasks">Uzdevums</label>
-                    <textarea id="tasks" th:field="*{tasks}" name="tasks" required></textarea>
-                </div>
-                <div>
-                    <label for="statusFromSupervisor">Supervisor statuss</label>
-                    <select id="statusFromSupervisor" th:field="*{statusFromSupervisor}" name="statusFromSupervisor" required>
-                        <option value="True">True</option>
-                        <option value="False">False</option>
-                    </select>
-                </div>
+                <label for="tasks">Uzdevums</label>
+                <textarea id="tasks" th:field="*{tasks}" name="tasks" required></textarea>
 
-                <div>
-                    <label for="status">Statuss</label>
-                    <select id="status" th:field="*{status}" name="status" required>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Accepted_with_conditions">Accepted_with_conditions</option>
-                        <option value="Rejected">Rejected</option>
-                        <option value="In_Review">In_Review</option>
-                        <option value="Submitted">Submitted</option>
-                    </select>
-                </div>
+				<label for="statusFromSupervisor">Supervisor status</label>
+				<select id="statusFromSupervisor" th:field="*{statusFromSupervisor}" name="statusFromSupervisor" required>
+				    <option value="True">True</option>
+				    <option value="False">False</option>
+
+				</select>
+				
+				<label for="status">Status</label>
+				<select id="status" th:field="*{status}" name="status" required>
+				    <option value="Accepted">Accepted</option>
+				    <option value="Accepted_with_conditions">Accepted_with_conditions</option>
+				    <option value="Rejected">Rejected</option>
+				    <option value="In_Review">In_Review</option>
+				    <option value="Submitted">Submitted</option>
+
+				</select>
+
 
 
                 <button type="submit">Atjaunot tēzi</button>

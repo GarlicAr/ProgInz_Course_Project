@@ -80,9 +80,9 @@ public class ThesisController {
     }
 
     @PostMapping("/update/{thesis_id}")
-    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, @Valid Thesis thesis, BindingResult result) {
+    public String updateThesisById(@PathVariable("thesis_id") long thesis_id, @ModelAttribute("thesis") @Valid Thesis thesis, BindingResult result) {
         if (result.hasErrors()) {
-            return "thesis-update-page";
+            return "update-thesis";
         } else {
             try {
                 thesisService.updateThesis(thesis);

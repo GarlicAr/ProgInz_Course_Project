@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.models.users.User;
 import lv.venta.models.users.Student;
+import lv.venta.repos.IRepoComments;
 import lv.venta.repos.users.IRepoStudent;
 import lv.venta.repos.users.IRepoUser;
+import lv.venta.services.impl.CommentsCRUDService;
 import lv.venta.services.users.IStudentCRUDService;
 
 @Service
@@ -20,6 +22,11 @@ public class StudentCRUDService implements IStudentCRUDService{
 	IRepoUser userRepo;
 	@Autowired
 	IRepoStudent studentRepo;
+	@Autowired
+	CommentsCRUDService commentsService;
+	@Autowired
+	IRepoComments commentsRepo;
+	
 	@Override
 	public ArrayList<Student> selectAllStudents() {
 		return (ArrayList<Student>) studentRepo.findAll();
@@ -84,6 +91,20 @@ public class StudentCRUDService implements IStudentCRUDService{
 	        throw new Exception("Nepareizs matrikulasNo");
 	    }
 	}
+	@Override
+	public Student findById(long id) {
+		
+		
+		for(Student student: selectAllStudents()) {
+			if(student.getPersonId() == id) {
+				return student;
+			}
+		}
+		
+		return null;
+		
+	}
+	
 	
 	
 }

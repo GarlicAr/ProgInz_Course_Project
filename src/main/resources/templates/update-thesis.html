@@ -72,11 +72,9 @@
         <a href="/comments/showAll">Comments</a>
         <a href="/student/showAll">Students</a>
     </div>
-
-    <!-- Main content -->
-    <div class="content">
+     <div class="content">
         <div class="container">
-            <form th:action="@{/thesis/insertNew}" th:object="${thesis}" method="post">
+            <form th:action="@{/thesis/update/{thesis_id}(thesis_id=${thesis.thesis_id})}" th:object="${thesis}" method="post">
                 <label for="titleLv">Nosaukums latviski</label>
                 <input type="text" id="titleLv" th:field="*{titleLv}" name="titleLv" required>
 
@@ -108,10 +106,9 @@
 
 
 
-                <button type="submit">Pievienot jaunu Tēzi</button>
+                <button type="submit">Atjaunot tēzi</button>
             </form>
         </div>
     </div>
-
 </body>
 </html>

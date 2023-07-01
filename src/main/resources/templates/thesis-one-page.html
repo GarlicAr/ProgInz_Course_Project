@@ -92,7 +92,8 @@
                     <th>Apstirpināšanas datums</th>
                     <th>Studenta ID</th>
                     <th>Personāža ID</th>
-                    <th>Komentāri</th>
+                    <th>Komentāri ID</th>
+
                 </tr>
                 <tr>
                     <td th:text="${MyThesisById.thesis_id}"></td>
@@ -104,9 +105,27 @@
                     <td th:text="${MyThesisById.statusFromSupervisor}"></td>
                     <td th:text="${MyThesisById.status}"></td>
                     <td th:text="${MyThesisById.acceptedDate}"></td>
-                    <td th:text="${MyThesisById.student}"></td> <!-- assuming student and personel are objects -->
-                    <td th:text="${MyThesisById.personel}"></td> <!-- and have id field -->
-                    <td th:text="${MyThesisById.comments}"></td>
+                    <td>
+					    <span th:if="${MyThesisById.student != null}" th:text="${MyThesisById.student.personId}"></span>
+					</td>
+
+		            <td>
+		                <span th:each="personel : ${MyThesisById.personel}" th:text="${personel.getPersonId()}"></span>
+		            </td>
+		            <td>
+		                 <span th:each="comment, iterStat : ${MyThesisById.comments}">
+		                    <span th:text="${comment.comment_id}"></span>
+		                    <span th:if="${!iterStat.last}">, </span>
+		                </span>
+		            </td>
+					<td>
+					    <form th:action="@{/thesis/remove/{thesis_id}(thesis_id=${MyThesisById.thesis_id})}" th:method="post">
+					        <input type="submit" value="Izdzēst"/>
+					    </form>
+					    <form th:action="@{/thesis/update/{thesis_id}(thesis_id=${MyThesisById.thesis_id})}" th:method="get">
+					        <input type="submit" value="Atjaunot"/>
+					    </form>
+					</td>
                 </tr>
             </table>
         </div>

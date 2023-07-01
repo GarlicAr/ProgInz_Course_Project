@@ -142,6 +142,32 @@
               
             </div>
 
+            <div class="container">
+
+                <table>
+                    <tr>
+                        <th>Studenta ID</th>
+                        <th>Studenta Vārds</th>
+                        <th>Pievienot kā parādnieku</th>
+                        <th>Noņemt parādnieku!</th>
+                    </tr>
+                    <tr th:each="student : ${students}">
+                        <td th:text="${student.personId}"></td>
+                        <td th:text="${student.personName}"></td>
+                        <td>
+                            <form th:action="@{/courses/addDebt/{courseId}/{studentId}(studentId=${student.personId}, courseId=${courses.courseId})}" method="POST">
+                                <button type="submit" class="add-debt-button">Pievienot kā parādnieku</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:action="@{/courses/removeDebt/{courseId}/{studentId}(courseId=${courses.courseId}, studentId=${student.personId})}" method="POST">
+                                <button type="submit" class="remove-debt-button">Noņemt</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
             <form th:action="@{/courses/delete/{id}(id=${courses.courseId})}" method="GET">
                 <button type="submit" class="delete-button">Delete</button>
             </form>

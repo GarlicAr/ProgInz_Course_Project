@@ -33,7 +33,7 @@ public class Comments {
 	public Long comment_id;
 	
 	@Column(name = "comment")
-	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
+	@Pattern(regexp = "^[A-Za-z0-9\\p{Punct}\\s]+$", message = "Pirmajam burtam jābūt lielajam")
 	private String text;
 	
 	@Column(name = "date")

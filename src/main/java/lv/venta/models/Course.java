@@ -37,7 +37,7 @@ import lv.venta.models.users.Student;
 public class Course {
 
 	@Column(name = "course_title")
-	@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam")
+	@Pattern(regexp = "^[A-ZĒŪĪĻĶŠĀŽČŅ][a-zA-ZĒŪĪĻĶŠĀŽČŅ_\\ ]*", message = "Pirmajam burtam jābūt lielajam")
 	@Size(min = 5, max = 25)
 	private String title;
 
@@ -65,8 +65,8 @@ public class Course {
 //	}
 	
 	public Course(
-		@Pattern(regexp = "[A-ZĒŪĪĻĶŠĀŽČŅ]{1}[a-zēūīļķšāžčņ\\ ]+", message = "Pirmajam burtam jābūt lielajam") @Size(min = 5, max = 25) String title,
-		@Min(1) @Max(4) int creditPoints) {
+		String title,
+		int creditPoints) {
 	this.title = title;
 	this.creditPoints = creditPoints;
 	}

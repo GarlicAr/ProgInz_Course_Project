@@ -24,17 +24,19 @@ public class User {
 	
 	
 	@Column(name = "password")
+
 //	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Jābūt vismaz 8 simbolus garai.\r\n"
 //			+ "Jāsatur vismaz viena maza burta rakstzīme.\r\n"
 //			+ "Jāsatur vismaz viena liela burta rakstzīme.\r\n"
 //			+ "Jāsatur vismaz viena cipara rakstzīme.\r\n"
 //			+ "Jāsatur vismaz viena īpaša rakstzīme (@, $, !, %, *, ?, &).")
 //	@NotNull
+
+
 	private String password;
 	
 	@Column(name = "email")
 	@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam")
-	@NotNull
 	private String email;
 	
 	@OneToOne(mappedBy = "user")
@@ -42,9 +44,10 @@ public class User {
 	private Person person;
 	
 	public User(
-			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam") @NotNull String email) {
+			@Pattern(regexp = "[a-z0-9]+@[a-z]+\\.[a-z]{3,}", message = "Pirmajam burtam jābūt mazajam") String email, String password) {
 		super();
 		this.email = email;
+		setPassword(password);
 	}
 	
 

@@ -2,17 +2,20 @@ package lv.venta.controllers;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
-import lv.venta.enums.Degree;
+
 import lv.venta.models.Study_program;
+import lv.venta.models.Thesis;
 import lv.venta.models.users.Academic_personel;
 import lv.venta.services.impl.StudyProgramCRUDService;
 
@@ -41,7 +44,7 @@ public class StudyProgramController {
 			
 			model.addAttribute("Study_program", temp);
 			
-			return "show-one-program";
+			return "show-one-programs";
 
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -67,6 +70,39 @@ public class StudyProgramController {
 		}
         
     }
+	
+	 @PostMapping("/Study_program/update/{id}")
+	    public String updateThesisById(@PathVariable("id") long studyProgram_id, @ModelAttribute("Study_program") @Valid Study_program Study_program, BindingResult result) {
+	        if (result.hasErrors()) {
+	            return "update-program";
+	        } else {
+	            try {
+	            	studyProgramService.updateStudyProgram(studyProgram_id, Study_program);
+	                return "redirect:/Study_program/showAll"; 
+	            } catch (Exception e) {
+	                return "error-page";
+	            }
+	        }
+	    }
+	
+	
+	@GetMapping("/Study_program/delete/{id}")
+	private String deleteStudyProgram(@PathVariable("id") int id, Model model) {
+		
+		try {
+			studyProgramService.deleteStudyProgramById(id);
+			model.addAttribute("Study_program", studyProgramService.getAll());
+					
+			return "redirect:/Study_program/showAll";
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "error-page";
+	}
+	
 	
 	@GetMapping("/Study_program/add")
 	private String createStudyProgram(Model model) {

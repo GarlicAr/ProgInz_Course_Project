@@ -11,12 +11,14 @@ import org.springframework.context.annotation.Bean;
 import lv.venta.enums.Degree;
 import lv.venta.models.Comments;
 import lv.venta.models.Course;
+import lv.venta.models.Study_program;
 import lv.venta.models.Thesis;
 import lv.venta.models.users.Academic_personel;
 import lv.venta.models.users.Student;
 import lv.venta.models.users.User;
 import lv.venta.repos.IRepoComments;
 import lv.venta.repos.IRepoCourse;
+import lv.venta.repos.IRepoStudyProgram;
 import lv.venta.repos.IRepoThesis;
 import lv.venta.repos.users.IRepoAcademicPersonel;
 import lv.venta.repos.users.IRepoPerson;
@@ -38,7 +40,8 @@ public class ProgInzCourseProjectApplication {
 			IRepoPerson personRep,
 			IRepoStudent studentRep,
 			IRepoUser userRep,
-			IRepoComments commentsRep) {
+			IRepoComments commentsRep,
+			IRepoStudyProgram studyProgramRepo) {
 		
 		
 		return new CommandLineRunner() {
@@ -101,7 +104,9 @@ public class ProgInzCourseProjectApplication {
 				commentsRep.save(comm1);
 				
 				
-				
+				//StudyPrograms
+				Study_program sp1 = new Study_program("IT", "1. līmeņa", "Programmētājs"); 
+				studyProgramRepo.save(sp1);
 				
 				
 			}

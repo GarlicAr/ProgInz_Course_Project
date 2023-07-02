@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 import lv.venta.models.Comments;
+import lv.venta.models.users.Academic_personel;
 import lv.venta.models.users.Student;
 import lv.venta.services.impl.CommentsCRUDService;
 import lv.venta.services.impl.ThesisCRUDService;
@@ -70,9 +71,9 @@ public class CommentController {
 //		
 //		model.addAttribute("date", LocalDateTime.now());
 //		
-//		model.addAttribute("personel", academic_personel);
-//		
-//		model.addAttribute("thesis", thesis_id);
+//		model.addAttribute("personel", new Academic_personel());
+		
+		//model.addAttribute("thesis", new thesis_id);
 		
 		List<Comments> comment = commentsService.selectAllComments();
         model.addAttribute("comments", comment);
@@ -108,10 +109,6 @@ public class CommentController {
 	
 	@GetMapping("/update/{id}")
     public String showCommentsUpdatePage(@PathVariable("id") int id, org.springframework.ui.Model model) {
-        
-		LocalDateTime now = LocalDateTime.now();
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	    String formattedDateTime = now.format(formatter);
 	    
 		try {
 			Comments temp = commentsService.findById(id);
@@ -128,7 +125,7 @@ public class CommentController {
 	
 	@PostMapping("/update/{id}")
     public String updateCommentsById(@PathVariable("id") int id, @Valid Comments comments, BindingResult result) {
-
+	    
 		if (result.hasErrors()) {
             return "update-comments";
         } else {

@@ -75,7 +75,7 @@
         .btn:hover {
             background-color: #45a049;
         }
-        
+
     </style>
 </head>
 <body>
@@ -93,33 +93,38 @@
    <!-- Main content -->
     <div class="content">
         
-<div class="container" th:if="${ not#lists.isEmpty(student)}">
+<div class="container" th:if="${ not#lists.isEmpty(Study_program)}">
     <table>
         <tr>
             <th>ID</th>
-            <th>Vārds</th>
-            <th>Uzvārds</th>
-            <th>Personas kods</th>
-            <th>Matrikulas numurs</th>
-
+            <th>Faculty</th>
+            <th>Level</th>
+            <th>Title</th>
+            <th>Darbibas</th>
+        </tr>
+        <tr th:each="Study_program : ${Study_program}">
+            <td th:text="${Study_program.StudyProgram_id}"></td>
+            <td th:text="${Study_program.faculty}"></td>
+            <td th:text="${Study_program.level}"></td>
+            <td th:text="${Study_program.title}"></td>
+            <td>
+            
+            <td>
+                <a th:href="@{/Study_program/showOne/{id}(id=${Study_program.StudyProgram_id})}">Apskatities</a>
+                <a th:href="@{/Study_program/update/{id}(id=${Study_program.StudyProgram_id})}">Atjaunot</a>
+            </td>
             
         </tr>
-        <tr th:each="student : ${student}">
-            <td th:text="${student.personId}"></td>
-            <td th:text="${student.personName}"></td>
-            <td th:text="${student.surname}"></td>
-            <td th:text="${student.personalCode}"></td>
-            <td th:text="${student.matriculaNo}"></td>
-
-            <td>
-                <form th:action="@{/student/remove/{matriculaNo}(matriculaNo=${student.matriculaNo})}" th:method="post">
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-        </tr>
+        
     </table>
+
+
+    <a class="btn" th:href="@{/Study_program/add}">Pievienot Jaunu programu</a>
+
+    
+
 </div>
-        <a class="btn" th:href="@{/student/insertNew}">Pievienot Jaunu</a>
+        
 
 
     </div>

@@ -124,34 +124,23 @@
     <div class="content">
         
         <div class="container">
-            <form action="/personel/add" method="POST" th:object="${personel}">
+            <form action="/Study_program/add" method="POST" th:object="${Study_program}">
                 <div>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="personName" th:field="*{personName}" required>
-                    <span th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}"></span>
+                    <label for="Faculty">Faculty:</label>
+                    <input type="text" id="faculty" name="faculty" th:field="*{faculty}" required>
+                    <span th:if="${#fields.hasErrors('faculty')}" th:errors="*{faculty}"></span>
                 </div>
                 <div>
-                    <label for="surname">Surname:</label>
-                    <input type="text" id="surname" name="surname" th:field="*{surname}" required>
-                    <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+                    <label for="Level">Level:</label>
+                    <input type="text" id="level" name="level" th:field="*{level}" required>
+                    <span th:if="${#fields.hasErrors('level')}" th:errors="*{level}"></span>
                 </div>
                 <div>
-                    <label for="personalCode">Personal Code:</label>
-                    <input type="text" id="personalCode" name="personalCode" th:field="*{personalCode}" required>
-                    <span th:if="${#fields.hasErrors('personalCode')}" th:errors="*{personalCode}"></span>
+                     <label for="Title">Title:</label>
+                    <input type="text" id="title" name="title" th:field="*{title}" required>
+                    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                 </div>
-                <div>
-                    <label for="user">User:</label>
-                    <select id="user" name="user.id" th:field="*{user}" required>
-                        <option th:each="user : ${users}" th:value="${user.user_id}" th:text="${user.email}"></option>
-                    </select>
-                </div>
-                <div>
-                    <label for="degree">Degree:</label>
-                    <select id="degree" name="degree" th:field="*{degree}" required>
-                        <option th:each="degree : ${degrees}" th:value="${degree}" th:text="${degree}"></option>
-                    </select>
-                </div>
+                
                 <button type="submit" class="btn">Create</button>
             </form>
         </div>

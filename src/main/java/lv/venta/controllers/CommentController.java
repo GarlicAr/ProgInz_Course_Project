@@ -84,7 +84,7 @@ public class CommentController {
 	
 	@PostMapping("/add")
 	private String createCommentsPost(@Valid Comments comments, BindingResult bindingResult) {
-		
+		System.out.println("ir");
 		if (bindingResult.hasErrors()) {
 	        
 	        return "error-page";
@@ -133,7 +133,7 @@ public class CommentController {
                 commentsService.updateCommentsById(id, comments);
                 return "redirect:/comments/showAll" + comments.getComment_id();
             } catch (Exception e) {
-                return "redirect:/error-page";
+                return "error-page";
             }
         }
 	}

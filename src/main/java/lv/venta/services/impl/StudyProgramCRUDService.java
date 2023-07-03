@@ -54,9 +54,9 @@ public class StudyProgramCRUDService implements IStudyProgramCRUDService{
 	@Override
 		public void addNewStudyProgram(Study_program Study_program) {
 		
-			if(findById(Study_program.getStudyProgram_id() )== null) {
+//			if(Study_program.getStudyProgram_id() != null) {
 				studyProgramRepo.save(Study_program);
-		}
+//		}
 	}
 	@Override
 	public List<Study_program> selectAllPrograms() {

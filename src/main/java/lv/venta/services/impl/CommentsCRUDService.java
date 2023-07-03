@@ -1,6 +1,8 @@
 package lv.venta.services.impl;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.models.Comments;
-import lv.venta.models.users.Person;
 import lv.venta.repos.IRepoComments;
 import lv.venta.services.ICommentsCRUDService;
 
@@ -22,9 +23,6 @@ public class CommentsCRUDService implements ICommentsCRUDService{
 	public List<Comments> getAll() {
 		return (List<Comments>) commentsRepo.findAll();
 	}
-
-	
-
 	
 	@Override
 	public Comments findById(long id) {
@@ -45,8 +43,7 @@ public class CommentsCRUDService implements ICommentsCRUDService{
 
 	@Override
 	public void insertNewComments(Comments comments) {
-		//commentsList.add(comments);
-		return;
+		commentsRepo.save(comments);
 	}
 
 	@Override
@@ -65,13 +62,13 @@ public class CommentsCRUDService implements ICommentsCRUDService{
 
 	@Override
 	public ArrayList<Comments> selectAllComments() {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList<Comments>) commentsRepo.findAll();
 	}
 
 
 	@Override
 	public void updateCommentsById(int id, Comments comments) {
+		
 		for (Comments comm : getAll()) {
 	        if (comm.getComment_id() == id) {
 	        	

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.validation.Valid;
 
 import lv.venta.models.Study_program;
-import lv.venta.models.Thesis;
-import lv.venta.models.users.Academic_personel;
 import lv.venta.services.impl.StudyProgramCRUDService;
 
 

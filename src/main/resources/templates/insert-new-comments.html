@@ -124,7 +124,7 @@
     <div class="content">
         
         <div class="container">
-            <form action="/add" method="POST" th:object="${comments}">
+            <form th:action="@{/comments/add}" method="POST" th:object="${comments}">
                 <div>
                     <label for="Comment">Comment:</label>
                     <input type="text" id="comment" name="text" th:field="*{text}" required>

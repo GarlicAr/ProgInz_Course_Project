@@ -1,5 +1,6 @@
 package lv.venta.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,7 @@ public class StudyProgramCRUDService implements IStudyProgramCRUDService{
 	}
 	@Override
 	public List<Study_program> selectAllPrograms() {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList<Study_program>) studyProgramRepo.findAll();
 	}
 	@Override
 	public Study_program findById(long id) {
